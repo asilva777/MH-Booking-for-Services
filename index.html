@@ -28,7 +28,7 @@
       margin-top: 1rem;
       font-weight: bold;
     }
-    input, select {
+    input, select, textarea {
       width: 100%;
       padding: 0.5rem;
       margin-top: 0.5rem;
@@ -37,13 +37,14 @@
     }
     button {
       margin-top: 2rem;
-      background-color: #ce00ce;
-      color: #fffffff;
+      background-color: purple;
+      color: white;
       padding: 1rem;
       border: none;
       border-radius: 5px;
       font-size: 1rem;
       cursor: pointer;
+      text-align: center;
     }
     .price {
       margin-top: 1rem;
@@ -51,11 +52,46 @@
       color: #118ab2;
       text-align: center;
     }
+    .summary {
+      margin-top: 2rem;
+      background-color: #e6f2ff;
+      padding: 1rem;
+      border-radius: 5px;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+    }
   </style>
 </head>
 <body>
   <h1>Book Your Mental Health Appointment</h1>
   <form id="bookingForm">
+    <label for="name">Full Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="age">Age:</label>
+    <input type="number" id="age" name="age" required>
+
+    <label for="contact">Contact Number:</label>
+    <input type="tel" id="contact" name="contact" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="address">Address:</label>
+    <input type="text" id="address" name="address" required>
+
+    <label for="city">Select City/Province:</label>
+    <select id="city" name="city" required>
+      <option value="">-- Select City/Province --</option>
+      <option value="metro">Metro Manila (Highly Urbanized)</option>
+      <option value="cebu">Cebu City (Highly Urbanized)</option>
+      <option value="davao">Davao City (Highly Urbanized)</option>
+      <option value="iloilo">Iloilo</option>
+      <option value="naga">Naga City</option>
+      <option value="launion">La Union</option>
+      <option value="bukidnon">Bukidnon</option>
+      <option value="others">Others</option>
+    </select>
+
     <label for="service">Select Service:</label>
     <select id="service" name="service" required>
       <option value="">-- Please choose a service --</option>
@@ -82,15 +118,45 @@
     <label for="time">Preferred Time:</label>
     <input type="time" id="time" name="time" required>
 
+    <label for="symptoms">1. What symptoms or concerns are you experiencing?</label>
+    <textarea id="symptoms" name="symptoms" rows="2"></textarea>
+
+    <label for="onset">2. When did you first notice these symptoms?</label>
+    <textarea id="onset" name="onset" rows="2"></textarea>
+
+    <label for="impact">3. How do these symptoms affect your daily life?</label>
+    <textarea id="impact" name="impact" rows="2"></textarea>
+
+    <label for="management">4. Have you tried anything to manage these symptoms?</label>
+    <textarea id="management" name="management" rows="2"></textarea>
+
+    <label for="trigger">5. Was there a specific event that triggered your symptoms?</label>
+    <textarea id="trigger" name="trigger" rows="2"></textarea>
+
+    <label for="history">6. Do you have a history of mental health conditions?</label>
+    <textarea id="history" name="history" rows="2"></textarea>
+
+    <label for="medications">7. Are you currently taking any medications?</label>
+    <textarea id="medications" name="medications" rows="2"></textarea>
+
+    <label for="familyHistory">8. Do you have any family history of mental health conditions?</label>
+    <textarea id="familyHistory" name="familyHistory" rows="2"></textarea>
+
+    <label for="expectations">9. What are your expectations from therapy or treatment?</label>
+    <textarea id="expectations" name="expectations" rows="2"></textarea>
+
     <div class="price" id="priceOutput">Estimated Price: PHP 0</div>
 
-    <button type="submit">Confirm Booking</button>
+    <button type="submit">Book Now</button>
   </form>
+
+  <div class="summary" id="summaryCard" style="display:none;"></div>
 
   <script>
     const priceOutput = document.getElementById('priceOutput');
     const serviceSelect = document.getElementById('service');
     const profileSelect = document.getElementById('profile');
+    const citySelect = document.getElementById('city');
 
     const basePrices = {
       psychiatric: 2000,
@@ -108,26 +174,63 @@
       default: 0
     };
 
+    const urbanAddOn = ["metro", "cebu", "davao"];
+
+    let finalPrice = 0;
+
     function calculatePrice() {
       const service = serviceSelect.value;
       const profile = profileSelect.value;
+      const city = citySelect.value;
 
-      if (service && profile) {
+      if (service && profile && city) {
         const base = basePrices[service];
         const discount = discounts[profile];
-        const finalPrice = base - (base * discount);
+        const cityRate = urbanAddOn.includes(city) ? 1.2 : 1.0;
+        const discounted = base - (base * discount);
+        finalPrice = discounted * cityRate;
         priceOutput.textContent = `Estimated Price: PHP ${finalPrice.toFixed(2)}`;
       } else {
+        finalPrice = 0;
         priceOutput.textContent = 'Estimated Price: PHP 0';
       }
     }
 
     serviceSelect.addEventListener('change', calculatePrice);
     profileSelect.addEventListener('change', calculatePrice);
+    citySelect.addEventListener('change', calculatePrice);
 
     document.getElementById('bookingForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      alert('Your appointment has been booked successfully!');
+
+      const summary = document.getElementById('summaryCard');
+      summary.innerHTML = `
+        <h3>Booking Summary</h3>
+        <p><strong>Name:</strong> ${document.getElementById('name').value}</p>
+        <p><strong>Age:</strong> ${document.getElementById('age').value}</p>
+        <p><strong>Contact:</strong> ${document.getElementById('contact').value}</p>
+        <p><strong>Email:</strong> ${document.getElementById('email').value}</p>
+        <p><strong>Address:</strong> ${document.getElementById('address').value}</p>
+        <p><strong>City:</strong> ${document.getElementById('city').value}</p>
+        <p><strong>Service:</strong> ${document.getElementById('service').value}</p>
+        <p><strong>Profile:</strong> ${document.getElementById('profile').value}</p>
+        <p><strong>Date:</strong> ${document.getElementById('date').value}</p>
+        <p><strong>Time:</strong> ${document.getElementById('time').value}</p>
+        <p><strong>Price:</strong> PHP ${finalPrice.toFixed(2)}</p>
+        <hr>
+        <p><strong>Symptoms:</strong> ${document.getElementById('symptoms').value}</p>
+        <p><strong>Onset:</strong> ${document.getElementById('onset').value}</p>
+        <p><strong>Impact:</strong> ${document.getElementById('impact').value}</p>
+        <p><strong>Management:</strong> ${document.getElementById('management').value}</p>
+        <p><strong>Trigger:</strong> ${document.getElementById('trigger').value}</p>
+        <p><strong>History:</strong> ${document.getElementById('history').value}</p>
+        <p><strong>Medications:</strong> ${document.getElementById('medications').value}</p>
+        <p><strong>Family History:</strong> ${document.getElementById('familyHistory').value}</p>
+        <p><strong>Expectations:</strong> ${document.getElementById('expectations').value}</p>
+      `;
+
+      summary.style.display = 'block';
+      summary.scrollIntoView({ behavior: 'smooth' });
     });
   </script>
 </body>
