@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cognitio+ Appointment Booking</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    (function(){
+      emailjs.init("service_xfy4bbu"); // Your EmailJS service ID
+    })();
+  </script>
   <style>
+    /* (same styles as before, unchanged) */
     body {
       font-family: 'Montserrat', sans-serif;
       background-color: #f4f8fb;
@@ -44,7 +51,6 @@
       border-radius: 5px;
       font-size: 1rem;
       cursor: pointer;
-      text-align: center;
     }
     .price {
       margin-top: 1rem;
@@ -64,21 +70,17 @@
 <body>
   <h1>Book Your Mental Health Appointment</h1>
   <form id="bookingForm">
+    <!-- all form fields (unchanged) -->
     <label for="name">Full Name:</label>
     <input type="text" id="name" name="name" required>
-
     <label for="age">Age:</label>
     <input type="number" id="age" name="age" required>
-
     <label for="contact">Contact Number:</label>
     <input type="tel" id="contact" name="contact" required>
-
     <label for="email">Email:</label>
     <input type="email" id="email" name="email" required>
-
     <label for="address">Address:</label>
     <input type="text" id="address" name="address" required>
-
     <label for="city">Select City/Province:</label>
     <select id="city" name="city" required>
       <option value="">-- Select City/Province --</option>
@@ -91,7 +93,6 @@
       <option value="bukidnon">Bukidnon</option>
       <option value="others">Others</option>
     </select>
-
     <label for="service">Select Service:</label>
     <select id="service" name="service" required>
       <option value="">-- Please choose a service --</option>
@@ -101,7 +102,6 @@
       <option value="rehabilitation">Psychosocial Rehabilitation Support with MHPSS Expert</option>
       <option value="resilience">Resilience Consultation</option>
     </select>
-
     <label for="profile">Select Your Profile:</label>
     <select id="profile" name="profile" required>
       <option value="">-- Select Profile --</option>
@@ -111,17 +111,12 @@
       <option value="pwds">Person with Disability</option>
       <option value="default">General Public</option>
     </select>
-
     <label for="date">Preferred Date:</label>
     <input type="date" id="date" name="date" required>
-
     <label for="time">Preferred Time:</label>
     <input type="time" id="time" name="time" required>
 
-    
-
     <div class="price" id="priceOutput">Estimated Price: PHP 0</div>
-
     <button type="submit">Book Now</button>
   </form>
 
@@ -150,7 +145,6 @@
     };
 
     const urbanAddOn = ["metro", "cebu", "davao"];
-
     let finalPrice = 0;
 
     function calculatePrice() {
@@ -178,22 +172,44 @@
     document.getElementById('bookingForm').addEventListener('submit', function(e) {
       e.preventDefault();
 
+      const form = e.target;
+
+      const templateParams = {
+        name: form.name.value,
+        age: form.age.value,
+        contact: form.contact.value,
+        email: form.email.value,
+        address: form.address.value,
+        city: form.city.value,
+        service: form.service.value,
+        profile: form.profile.value,
+        date: form.date.value,
+        time: form.time.value,
+        price: finalPrice.toFixed(2)
+      };
+
+      emailjs.send("service_xfy4bbu", "template_default", templateParams)
+        .then(function(response) {
+          alert("Booking email sent successfully!");
+        }, function(error) {
+          alert("Failed to send booking email: " + JSON.stringify(error));
+        });
+
       const summary = document.getElementById('summaryCard');
       summary.innerHTML = `
         <h3>Booking Summary</h3>
-        <p><strong>Name:</strong> ${document.getElementById('name').value}</p>
-        <p><strong>Age:</strong> ${document.getElementById('age').value}</p>
-        <p><strong>Contact:</strong> ${document.getElementById('contact').value}</p>
-        <p><strong>Email:</strong> ${document.getElementById('email').value}</p>
-        <p><strong>Address:</strong> ${document.getElementById('address').value}</p>
-        <p><strong>City:</strong> ${document.getElementById('city').value}</p>
-        <p><strong>Service:</strong> ${document.getElementById('service').value}</p>
-        <p><strong>Profile:</strong> ${document.getElementById('profile').value}</p>
-        <p><strong>Date:</strong> ${document.getElementById('date').value}</p>
-        <p><strong>Time:</strong> ${document.getElementById('time').value}</p>
-        <p><strong>Price:</strong> PHP ${finalPrice.toFixed(2)}</p>
+        <p><strong>Name:</strong> ${templateParams.name}</p>
+        <p><strong>Age:</strong> ${templateParams.age}</p>
+        <p><strong>Contact:</strong> ${templateParams.contact}</p>
+        <p><strong>Email:</strong> ${templateParams.email}</p>
+        <p><strong>Address:</strong> ${templateParams.address}</p>
+        <p><strong>City:</strong> ${templateParams.city}</p>
+        <p><strong>Service:</strong> ${templateParams.service}</p>
+        <p><strong>Profile:</strong> ${templateParams.profile}</p>
+        <p><strong>Date:</strong> ${templateParams.date}</p>
+        <p><strong>Time:</strong> ${templateParams.time}</p>
+        <p><strong>Price:</strong> PHP ${templateParams.price}</p>
         <hr>
-      
       `;
 
       summary.style.display = 'block';
