@@ -118,32 +118,7 @@
     <label for="time">Preferred Time:</label>
     <input type="time" id="time" name="time" required>
 
-    <label for="symptoms">1. What symptoms or concerns are you experiencing?</label>
-    <textarea id="symptoms" name="symptoms" rows="2"></textarea>
-
-    <label for="onset">2. When did you first notice these symptoms?</label>
-    <textarea id="onset" name="onset" rows="2"></textarea>
-
-    <label for="impact">3. How do these symptoms affect your daily life?</label>
-    <textarea id="impact" name="impact" rows="2"></textarea>
-
-    <label for="management">4. Have you tried anything to manage these symptoms?</label>
-    <textarea id="management" name="management" rows="2"></textarea>
-
-    <label for="trigger">5. Was there a specific event that triggered your symptoms?</label>
-    <textarea id="trigger" name="trigger" rows="2"></textarea>
-
-    <label for="history">6. Do you have a history of mental health conditions?</label>
-    <textarea id="history" name="history" rows="2"></textarea>
-
-    <label for="medications">7. Are you currently taking any medications?</label>
-    <textarea id="medications" name="medications" rows="2"></textarea>
-
-    <label for="familyHistory">8. Do you have any family history of mental health conditions?</label>
-    <textarea id="familyHistory" name="familyHistory" rows="2"></textarea>
-
-    <label for="expectations">9. What are your expectations from therapy or treatment?</label>
-    <textarea id="expectations" name="expectations" rows="2"></textarea>
+    
 
     <div class="price" id="priceOutput">Estimated Price: PHP 0</div>
 
@@ -218,15 +193,7 @@
         <p><strong>Time:</strong> ${document.getElementById('time').value}</p>
         <p><strong>Price:</strong> PHP ${finalPrice.toFixed(2)}</p>
         <hr>
-        <p><strong>Symptoms:</strong> ${document.getElementById('symptoms').value}</p>
-        <p><strong>Onset:</strong> ${document.getElementById('onset').value}</p>
-        <p><strong>Impact:</strong> ${document.getElementById('impact').value}</p>
-        <p><strong>Management:</strong> ${document.getElementById('management').value}</p>
-        <p><strong>Trigger:</strong> ${document.getElementById('trigger').value}</p>
-        <p><strong>History:</strong> ${document.getElementById('history').value}</p>
-        <p><strong>Medications:</strong> ${document.getElementById('medications').value}</p>
-        <p><strong>Family History:</strong> ${document.getElementById('familyHistory').value}</p>
-        <p><strong>Expectations:</strong> ${document.getElementById('expectations').value}</p>
+      
       `;
 
       summary.style.display = 'block';
