@@ -4,15 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cognitio+ Appointment Booking</title>
+  <meta name="description" content="Book your appointment with Cognitio+ Mental Health Access Model. Choose services, profiles, and get dynamic pricing."/>
+  <meta name="keywords" content="mental health, appointment, booking, psychology, psychiatry, resilience, Cognitio+">
+  <meta property="og:title" content="Cognitio+ Appointment Booking" />
+  <meta property="og:description" content="Book your mental health appointment with dynamic pricing and service selection." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://github.com/asilva777/MH-Booking-for-Services" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-  <script>
-    (function(){
-      emailjs.init("service_xfy4bbu"); // Your EmailJS service ID
-    })();
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js" defer></script>
+  <!-- Move styles to style.css in production -->
   <style>
-    /* (same styles as before, unchanged) */
     body {
       font-family: 'Montserrat', sans-serif;
       background-color: #f4f8fb;
@@ -42,6 +43,17 @@
       border: 1px solid #ccc;
       border-radius: 5px;
     }
+    input:invalid, select:invalid {
+      border-color: #e63946;
+    }
+    .validation-message {
+      color: #e63946;
+      font-size: 0.9rem;
+      display: none;
+    }
+    .visible {
+      display: block !important;
+    }
     button {
       margin-top: 2rem;
       background-color: purple;
@@ -52,11 +64,21 @@
       font-size: 1rem;
       cursor: pointer;
     }
+    button[aria-busy="true"] {
+      background-color: #888;
+      cursor: not-allowed;
+    }
     .price {
       margin-top: 1rem;
       font-weight: bold;
       color: #118ab2;
       text-align: center;
+    }
+    .price-info {
+      font-size: 0.95rem;
+      color: #666;
+      text-align: center;
+      margin-bottom: 1rem;
     }
     .summary {
       margin-top: 2rem;
@@ -65,155 +87,266 @@
       border-radius: 5px;
       box-shadow: 0 1px 5px rgba(0,0,0,0.1);
     }
+    .spinner {
+      display: none;
+      margin: 0 auto;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #073b4c;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg);}
+      100% { transform: rotate(360deg);}
+    }
+    @media (max-width: 700px) {
+      body, form {
+        padding: 1rem;
+      }
+      form {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
   <h1>Book Your Mental Health Appointment</h1>
-  <form id="bookingForm">
-    <!-- all form fields (unchanged) -->
+  <form id="bookingForm" novalidate aria-label="Appointment Booking Form">
     <label for="name">Full Name:</label>
-    <input type="text" id="name" name="name" required>
+    <input type="text" id="name" name="name" required aria-required="true" aria-label="Full Name">
+    <div class="validation-message" id="nameError">Please provide your full name.</div>
+    
     <label for="age">Age:</label>
-    <input type="number" id="age" name="age" required>
+    <input type="number" id="age" name="age" required min="1" max="120" aria-required="true" aria-label="Age">
+    <div class="validation-message" id="ageError">Please enter a valid age between 1 and 120.</div>
+    
     <label for="contact">Contact Number:</label>
-    <input type="tel" id="contact" name="contact" required>
+    <input type="tel" id="contact" name="contact" required pattern="^09\d{9}$" maxlength="11" aria-required="true" aria-label="Contact Number (e.g. 09XXXXXXXXX)">
+    <div class="validation-message" id="contactError">Please enter a valid PH mobile number (e.g. 09XXXXXXXXX).</div>
+    
     <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
+    <input type="email" id="email" name="email" required aria-required="true" aria-label="Email">
+    <div class="validation-message" id="emailError">Enter a valid email address.</div>
+    
     <label for="address">Address:</label>
-    <input type="text" id="address" name="address" required>
+    <input type="text" id="address" name="address" required aria-required="true" aria-label="Address">
+    <div class="validation-message" id="addressError">Please provide your address.</div>
+    
     <label for="city">Select City/Province:</label>
-    <select id="city" name="city" required>
+    <select id="city" name="city" required aria-required="true" aria-label="Select City or Province">
       <option value="">-- Select City/Province --</option>
-      <option value="metro">Metro Manila (Highly Urbanized)</option>
-      <option value="cebu">Cebu City (Highly Urbanized)</option>
-      <option value="davao">Davao City (Highly Urbanized)</option>
-      <option value="iloilo">Iloilo</option>
-      <option value="naga">Naga City</option>
-      <option value="launion">La Union</option>
-      <option value="bukidnon">Bukidnon</option>
-      <option value="others">Others</option>
+      <optgroup label="Highly Urbanized">
+        <option value="metro">Metro Manila</option>
+        <option value="cebu">Cebu City</option>
+        <option value="davao">Davao City</option>
+      </optgroup>
+      <optgroup label="Other Provinces">
+        <option value="iloilo">Iloilo</option>
+        <option value="naga">Naga City</option>
+        <option value="launion">La Union</option>
+        <option value="bukidnon">Bukidnon</option>
+        <option value="others">Others</option>
+      </optgroup>
     </select>
+    <div class="validation-message" id="cityError">Please select your city or province.</div>
+    
     <label for="service">Select Service:</label>
-    <select id="service" name="service" required>
+    <select id="service" name="service" required aria-required="true" aria-label="Select Service">
       <option value="">-- Please choose a service --</option>
-      <option value="psychiatric">Psychiatric Consultation</option>
-      <option value="psychotherapy">Psychotherapy with Psychologists</option>
-      <option value="support">Psychosocial Support Intervention with MHPSS Expert</option>
-      <option value="rehabilitation">Psychosocial Rehabilitation Support with MHPSS Expert</option>
-      <option value="resilience">Resilience Consultation</option>
+      <optgroup label="Mental Health Services">
+        <option value="psychiatric">Psychiatric Consultation</option>
+        <option value="psychotherapy">Psychotherapy with Psychologists</option>
+        <option value="support">Psychosocial Support Intervention with MHPSS Expert</option>
+        <option value="rehabilitation">Psychosocial Rehabilitation Support with MHPSS Expert</option>
+        <option value="resilience">Resilience Consultation</option>
+      </optgroup>
     </select>
+    <div class="validation-message" id="serviceError">Please select a service.</div>
+
     <label for="profile">Select Your Profile:</label>
-    <select id="profile" name="profile" required>
+    <select id="profile" name="profile" required aria-required="true" aria-label="Select Profile">
       <option value="">-- Select Profile --</option>
-      <option value="student">Student / Youth (Low Income)</option>
-      <option value="worker">Employed Individual</option>
-      <option value="senior">Senior Citizen</option>
-      <option value="pwds">Person with Disability</option>
-      <option value="default">General Public</option>
+      <optgroup label="Special Groups">
+        <option value="student">Student / Youth (Low Income)</option>
+        <option value="senior">Senior Citizen</option>
+        <option value="pwds">Person with Disability</option>
+      </optgroup>
+      <optgroup label="General">
+        <option value="worker">Employed Individual</option>
+        <option value="default">General Public</option>
+      </optgroup>
     </select>
+    <div class="validation-message" id="profileError">Please select your profile.</div>
+
     <label for="date">Preferred Date:</label>
-    <input type="date" id="date" name="date" required>
+    <input type="date" id="date" name="date" required aria-required="true" aria-label="Preferred Date">
+    <div class="validation-message" id="dateError">Please select a date.</div>
+
     <label for="time">Preferred Time:</label>
-    <input type="time" id="time" name="time" required>
+    <input type="time" id="time" name="time" required aria-required="true" aria-label="Preferred Time">
+    <div class="validation-message" id="timeError">Please select a time.</div>
 
-    <div class="price" id="priceOutput">Estimated Price: PHP 0</div>
-    <button type="submit">Book Now</button>
+    <div class="price" id="priceOutput" aria-live="polite">Estimated Price: PHP 0</div>
+    <div class="price-info" id="priceInfo">
+      Pricing is based on service, profile discount, and an urban area add-on (20%). <a href="#" aria-label="More info" title="More info on pricing" onclick="alert('Base rates: Psychiatric 2,000; Psychotherapy 1,500; Support 1,200; Rehabilitation 1,000; Resilience 800. Discounts: Student 40%, Worker 10%, Senior/PWD 30%. Highly urbanized cities add 20%.')">More info</a>
+    </div>
+    <button type="submit" aria-label="Book Now" id="submitBtn">Book Now</button>
+    <div class="spinner" id="spinner" aria-label="Loading"></div>
   </form>
-
-  <div class="summary" id="summaryCard" style="display:none;"></div>
-
+  
+  <div class="summary" id="summaryCard" style="display:none;" tabindex="0" aria-live="polite"></div>
+  
+  <!-- Move JS to external app.js in production -->
   <script>
-    const priceOutput = document.getElementById('priceOutput');
-    const serviceSelect = document.getElementById('service');
-    const profileSelect = document.getElementById('profile');
-    const citySelect = document.getElementById('city');
+    // EmailJS: Do not expose your keys in production! Use environment variables/serverless functions.
+    document.addEventListener('DOMContentLoaded', function() {
+      // EmailJS initialization
+      emailjs.init("service_xfy4bbu"); // Move to env/server in production
 
-    const basePrices = {
-      psychiatric: 2000,
-      psychotherapy: 1500,
-      support: 1200,
-      rehabilitation: 1000,
-      resilience: 800
-    };
-
-    const discounts = {
-      student: 0.4,
-      worker: 0.1,
-      senior: 0.3,
-      pwds: 0.3,
-      default: 0
-    };
-
-    const urbanAddOn = ["metro", "cebu", "davao"];
-    let finalPrice = 0;
-
-    function calculatePrice() {
-      const service = serviceSelect.value;
-      const profile = profileSelect.value;
-      const city = citySelect.value;
-
-      if (service && profile && city) {
-        const base = basePrices[service];
-        const discount = discounts[profile];
-        const cityRate = urbanAddOn.includes(city) ? 1.2 : 1.0;
-        const discounted = base - (base * discount);
-        finalPrice = discounted * cityRate;
-        priceOutput.textContent = `Estimated Price: PHP ${finalPrice.toFixed(2)}`;
-      } else {
-        finalPrice = 0;
-        priceOutput.textContent = 'Estimated Price: PHP 0';
-      }
-    }
-
-    serviceSelect.addEventListener('change', calculatePrice);
-    profileSelect.addEventListener('change', calculatePrice);
-    citySelect.addEventListener('change', calculatePrice);
-
-    document.getElementById('bookingForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      const form = e.target;
-
-      const templateParams = {
-        name: form.name.value,
-        age: form.age.value,
-        contact: form.contact.value,
-        email: form.email.value,
-        address: form.address.value,
-        city: form.city.value,
-        service: form.service.value,
-        profile: form.profile.value,
-        date: form.date.value,
-        time: form.time.value,
-        price: finalPrice.toFixed(2)
-      };
-
-      emailjs.send("service_xfy4bbu", "template_default", templateParams)
-        .then(function(response) {
-          alert("Booking email sent successfully!");
-        }, function(error) {
-          alert("Failed to send booking email: " + JSON.stringify(error));
-        });
-
+      const form = document.getElementById('bookingForm');
+      const spinner = document.getElementById('spinner');
+      const submitBtn = document.getElementById('submitBtn');
       const summary = document.getElementById('summaryCard');
-      summary.innerHTML = `
-        <h3>Booking Summary</h3>
-        <p><strong>Name:</strong> ${templateParams.name}</p>
-        <p><strong>Age:</strong> ${templateParams.age}</p>
-        <p><strong>Contact:</strong> ${templateParams.contact}</p>
-        <p><strong>Email:</strong> ${templateParams.email}</p>
-        <p><strong>Address:</strong> ${templateParams.address}</p>
-        <p><strong>City:</strong> ${templateParams.city}</p>
-        <p><strong>Service:</strong> ${templateParams.service}</p>
-        <p><strong>Profile:</strong> ${templateParams.profile}</p>
-        <p><strong>Date:</strong> ${templateParams.date}</p>
-        <p><strong>Time:</strong> ${templateParams.time}</p>
-        <p><strong>Price:</strong> PHP ${templateParams.price}</p>
-        <hr>
-      `;
+      const priceOutput = document.getElementById('priceOutput');
+      const serviceSelect = document.getElementById('service');
+      const profileSelect = document.getElementById('profile');
+      const citySelect = document.getElementById('city');
+      let finalPrice = 0;
+      const basePrices = {
+        psychiatric: 2000,
+        psychotherapy: 1500,
+        support: 1200,
+        rehabilitation: 1000,
+        resilience: 800
+      };
+      const discounts = {
+        student: 0.4,
+        worker: 0.1,
+        senior: 0.3,
+        pwds: 0.3,
+        default: 0
+      };
+      const urbanAddOn = ["metro", "cebu", "davao"];
+      function calculatePrice() {
+        const service = serviceSelect.value;
+        const profile = profileSelect.value;
+        const city = citySelect.value;
+        if (service && profile && city) {
+          const base = basePrices[service];
+          const discount = discounts[profile];
+          const cityRate = urbanAddOn.includes(city) ? 1.2 : 1.0;
+          const discounted = base - (base * discount);
+          finalPrice = discounted * cityRate;
+          priceOutput.textContent = `Estimated Price: PHP ${finalPrice.toFixed(2)}`;
+        } else {
+          finalPrice = 0;
+          priceOutput.textContent = 'Estimated Price: PHP 0';
+        }
+      }
+      serviceSelect.addEventListener('change', calculatePrice);
+      profileSelect.addEventListener('change', calculatePrice);
+      citySelect.addEventListener('change', calculatePrice);
 
-      summary.style.display = 'block';
-      summary.scrollIntoView({ behavior: 'smooth' });
+      // Real-time validation
+      const fields = [
+        {id: 'name', message: 'nameError'},
+        {id: 'age', message: 'ageError'},
+        {id: 'contact', message: 'contactError'},
+        {id: 'email', message: 'emailError'},
+        {id: 'address', message: 'addressError'},
+        {id: 'city', message: 'cityError'},
+        {id: 'service', message: 'serviceError'},
+        {id: 'profile', message: 'profileError'},
+        {id: 'date', message: 'dateError'},
+        {id: 'time', message: 'timeError'}
+      ];
+      fields.forEach(f => {
+        const input = document.getElementById(f.id);
+        const msg = document.getElementById(f.message);
+        input.addEventListener('input', function() {
+          if (input.checkValidity()) {
+            msg.classList.remove('visible');
+          } else {
+            msg.classList.add('visible');
+          }
+        });
+      });
+
+      function validateForm() {
+        let valid = true;
+        fields.forEach(f => {
+          const input = document.getElementById(f.id);
+          const msg = document.getElementById(f.message);
+          if (!input.checkValidity()) {
+            msg.classList.add('visible');
+            valid = false;
+          } else {
+            msg.classList.remove('visible');
+          }
+        });
+        return valid;
+      }
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (!validateForm()) {
+          return;
+        }
+        spinner.style.display = 'block';
+        submitBtn.setAttribute('aria-busy', 'true');
+        submitBtn.disabled = true;
+
+        const templateParams = {
+          name: form.name.value,
+          age: form.age.value,
+          contact: form.contact.value,
+          email: form.email.value,
+          address: form.address.value,
+          city: form.city.value,
+          service: form.service.value,
+          profile: form.profile.value,
+          date: form.date.value,
+          time: form.time.value,
+          price: finalPrice.toFixed(2)
+        };
+
+        emailjs.send("service_xfy4bbu", "template_default", templateParams)
+          .then(function(response) {
+            spinner.style.display = 'none';
+            submitBtn.removeAttribute('aria-busy');
+            submitBtn.disabled = false;
+            alert("Booking email sent successfully!");
+          }, function(error) {
+            spinner.style.display = 'none';
+            submitBtn.removeAttribute('aria-busy');
+            submitBtn.disabled = false;
+            let errorMsg = "Failed to send booking email.";
+            if (error.status === 0) errorMsg += " (Network error.)";
+            if (error.text) errorMsg += " " + error.text;
+            alert(errorMsg);
+          });
+
+        summary.innerHTML = `
+          <h3>Booking Summary</h3>
+          <p><strong>Name:</strong> ${templateParams.name}</p>
+          <p><strong>Age:</strong> ${templateParams.age}</p>
+          <p><strong>Contact:</strong> ${templateParams.contact}</p>
+          <p><strong>Email:</strong> ${templateParams.email}</p>
+          <p><strong>Address:</strong> ${templateParams.address}</p>
+          <p><strong>City:</strong> ${templateParams.city}</p>
+          <p><strong>Service:</strong> ${templateParams.service}</p>
+          <p><strong>Profile:</strong> ${templateParams.profile}</p>
+          <p><strong>Date:</strong> ${templateParams.date}</p>
+          <p><strong>Time:</strong> ${templateParams.time}</p>
+          <p><strong>Price:</strong> PHP ${templateParams.price}</p>
+          <hr>
+        `;
+        summary.style.display = 'block';
+        summary.focus();
+        summary.scrollIntoView({ behavior: 'smooth' });
+      });
     });
   </script>
 </body>
