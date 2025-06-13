@@ -5,11 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cognitio+ | Book a Session</title>
   <link rel="stylesheet" href="styles.css"/>
+  <style>
+    .row { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .row label, .row select, .row input, .row textarea { flex: 1; min-width: 180px; }
+    .hidden { display: none; }
+    #pricing-box { margin-top: 1.5rem; font-size: 1.25rem; padding: 1rem; background: #f3f8ff; border-radius: 8px; }
+  </style>
 </head>
 <body>
   <main class="container">
     <h1>Book Your Mental Health Session</h1>
-    <form id="bookingForm">
+    <form id="bookingForm" autocomplete="off">
       <!-- A. CLIENT INFO -->
       <fieldset>
         <legend>🧍 A. Client Info</legend>
@@ -19,8 +25,54 @@
         <label>Age <input type="number" name="age" required></label>
         <label>Gender <input type="text" name="gender" required></label>
         <label>Complete Address <textarea name="address" required></textarea></label>
-
         <label>
+
+             <!-- Address Dropdowns -->
+        <div class="row">
+          <label>Region
+            <select id="region" required>
+              <option value="">Select Region</option>
+              <option value="ncr">National Capital Region</option>
+              <option value="central_luzon">Central Luzon</option>
+              <option value="central_visayas">Central Visayas</option>
+              <option value="davao_region">Davao Region</option>
+              <option value="other">Other</option>
+            </select>
+          </label>
+          <label>Province
+            <select id="province" required>
+              <option value="">Select Province</option>
+              <option value="metro_manila">Metro Manila</option>
+              <option value="cebu">Cebu</option>
+              <option value="davao_del_sur">Davao del Sur</option>
+              <option value="pampanga">Pampanga</option>
+              <option value="other">Other</option>
+            </select>
+          </label>
+          <label>City/Municipality
+            <input type="text" id="city" placeholder="e.g., Quezon City">
+          </label>
+          <label>Barangay
+            <input type="text" id="barangay" placeholder="e.g., Barangay San Antonio">
+          </label>
+        </div>
+
+           <!-- Employment Status -->
+        <label>Employment Status
+          <select id="employmentStatus" name="employment" required>
+            <option value="">Select Employment Status</option>
+            <option value="fulltime">Employed full-time</option>
+            <option value="parttime">Employed part-time</option>
+            <option value="selfemployed">Self-employed</option>
+            <option value="unemployed">Unemployed</option>
+            <option value="student">Student</option>
+            <option value="retired">Retired</option>
+            <option value="contract">Contract/Freelance</option>
+            <option value="other">Other</option>
+          </select>
+        </label>
+        <input type="text" id="employmentOther" name="employmentOther" class="hidden" placeholder="Please specify">
+
           <input type="checkbox" required />
           I agree with the <a href="https://aiwaapp.ai/site/12436/privacy-policy" target="_blank">Privacy Policy</a>
         </label>
@@ -29,7 +81,29 @@
           I agree with the <a href="https://aiwaapp.ai/site/12436/terms-of-service" target="_blank">Terms and Conditions</a>
         </label>
       </fieldset>
-
+   
+      <!-- Vulnerable Population Dropdown -->
+        <label>Vulnerable Population
+          <select id="vulnerable" required>
+            <option value="">Select</option>
+            <option value="elderly">Elderly (65+)</option>
+            <option value="children">Children (under 18)</option>
+            <option value="pwd">Persons with disabilities</option>
+            <option value="pregnant">Pregnant women</option>
+            <option value="lowincome">Low-income households</option>
+            <option value="homeless">Homeless individuals</option>
+            <option value="migrant">Migrant workers</option>
+            <option value="indigenous">Indigenous communities</option>
+            <option value="lgbtq">LGBTQ+ individuals</option>
+            <option value="chronic">People with chronic illnesses</option>
+            <option value="singleparent">Single-parent households</option>
+            <option value="refugee">Refugees and asylum seekers</option>
+            <option value="other">Other</option>
+            <option value="none">None of the above</option>
+          </select>
+        </label>
+        <input type="text" id="vulnerableOther" class="hidden" placeholder="Please specify (optional)">
+      </fieldset>
       <!-- B. HEALTH INFO -->
       <fieldset>
         <legend>🩺 B. Health Info</legend>
@@ -40,7 +114,6 @@
           </select>
         </label>
         <textarea name="diagnosis" placeholder="If yes, state diagnosis"></textarea>
-
         <label>Taking any medication?
           <select name="meds">
             <option>No</option>
@@ -48,7 +121,6 @@
           </select>
         </label>
         <textarea name="medsDetails" placeholder="If yes, list medications"></textarea>
-
         <label>Are you experiencing any of the following?</label>
         <label><input type="checkbox" name="crisis"> Thoughts of harming yourself</label>
         <label><input type="checkbox" name="anxiety"> Anxiety, panic, or phobias</label>
@@ -57,39 +129,109 @@
         <label><input type="checkbox" name="sleep"> Poor sleep or oversleeping</label>
       </fieldset>
 
-      <!-- C. SERVICE INFO -->
+      <!-- C. SERVICE & PRICING INFO -->
       <fieldset>
-        <legend>📅 C. Service Info</legend>
+        <legend>📅 C. Service Info & Dynamic Pricing</legend>
+        
+        <!-- Service Type -->
         <label>Service Title
-          <select name="service" required>
-            <option>Psychotherapy</option>
-            <option>Psychiatric Consultation</option>
-            <option>Psychosocial Expert Support</option>
-            <option>Psychosocial Rehab Expert</option>
-            <option>Resilience Consultation</option>
+          <select id="serviceType" name="service" required>
+            <option value="">Select Service</option>
+            <option value="psychotherapy">Psychotherapy (PHP800/hr)</option>
+            <option value="psychiatric">Psychiatric Consultation (PHP800/hr)</option>
+            <option value="psychosocial_support">Psychosocial Expert Support (PHP700/hr)</option>
+            <option value="psychosocial_rehab">Psychosocial Rehab Expert (PHP700/hr)</option>
+            <option value="resilience">Resilience Consultation (PHP700/hr)</option>
+            <option value="others">Other (PHP700/hr)</option>
           </select>
         </label>
 
+        <!-- Partner Professional (Read only) -->
         <label>With
           <input type="text" value="C+ Partner Professional" readonly>
         </label>
 
+        <!-- Schedule -->
         <label>When
           <input type="datetime-local" name="datetime" required>
         </label>
 
+        <!-- Where -->
         <label>Where
           <input type="text" value="Online Session" readonly>
         </label>
 
-        <label>Employment Status <input type="text" name="employment" required></label>
-      </fieldset>
+      <!-- Live Pricing Box -->
+      <div id="pricing-box">
+        <strong>Total Price:</strong> <span id="totalPrice">PHP 0</span>
+      </div>
 
       <button type="submit">Book Now</button>
     </form>
     <div id="confirmationMsg"></div>
   </main>
+  <script>
+    // Elements
+    const serviceType = document.getElementById('serviceType');
+    const employmentStatus = document.getElementById('employmentStatus');
+    const employmentOther = document.getElementById('employmentOther');
+    const region = document.getElementById('region');
+    const province = document.getElementById('province');
+    const vulnerable = document.getElementById('vulnerable');
+    const vulnerableOther = document.getElementById('vulnerableOther');
+    const totalPrice = document.getElementById('totalPrice');
 
-  <script src="script.js"></script>
+    // Show/hide "Other" text fields
+    employmentStatus.addEventListener('change', () => {
+      employmentOther.classList.toggle('hidden', employmentStatus.value !== 'other');
+    });
+    vulnerable.addEventListener('change', () => {
+      vulnerableOther.classList.toggle('hidden', vulnerable.value !== 'other');
+    });
+
+    // Pricing logic
+    function calculatePrice() {
+      let basePrice = 0;
+
+      // Service Type
+      if (serviceType.value === 'psychotherapy' || serviceType.value === 'psychiatric') {
+        basePrice = 800;
+      } else if (serviceType.value && serviceType.value !== '') {
+        basePrice = 700;
+      }
+
+      // Employment Status adjustment
+      const discountStatuses = ['unemployed','student','retired'];
+      if (discountStatuses.includes(employmentStatus.value)) basePrice -= 100;
+
+      // Address adjustment
+      // Example: rural provinces (Cebu, Davao del Sur, Pampanga, Other) get PHP50 discount
+      const ruralProvinces = ['cebu', 'davao_del_sur', 'pampanga', 'other'];
+      if (ruralProvinces.includes(province.value)) basePrice -= 50;
+
+      // Vulnerable population adjustment (PHP100 discount)
+      const vulnerableDiscounts = [
+        "elderly","children","pwd","pregnant","lowincome","homeless","migrant","indigenous","lgbtq","chronic","singleparent","refugee"
+      ];
+      if (vulnerableDiscounts.includes(vulnerable.value)) basePrice -= 100;
+
+      // Minimum price
+      if (basePrice < 0) basePrice = 0;
+
+      totalPrice.textContent = `PHP ${basePrice}`;
+    }
+
+    // Listen for changes
+    [serviceType, employmentStatus, region, province, vulnerable].forEach(el => el.addEventListener('change', calculatePrice));
+
+    // Recalculate on load (if fields are prefilled)
+    window.addEventListener('DOMContentLoaded', calculatePrice);
+
+    // Optionally, show confirmation after submit (replace with real booking logic as needed)
+    document.getElementById('bookingForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('confirmationMsg').innerHTML = '<strong>Booking submitted!</strong> We will contact you via email/SMS for confirmation.';
+    });
+  </script>
 </body>
 </html>
