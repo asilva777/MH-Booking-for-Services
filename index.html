@@ -20,28 +20,50 @@
     <form id="bookingForm" autocomplete="off">
       <!-- A. CLIENT INFO -->
       <fieldset>
-        <legend>🧍 A. Client Info</legend>
+      <div>
+          <legend>🧍 A. Client Info</legend>
+      </div> 
+             <dv>
         <label>Full Name <input type="text" name="name" required></label>
-        <label>Email Address <input type="email" name="email" required></label>
-        <label>Mobile Number <input type="tel" name="mobile" required></label>
-        <label>Age <input type="number" name="age" required></label>
-        <label>Gender <input type="text" name="gender" required></label>
-        <label>Complete Address <textarea name="address" required></textarea></label>
+         </div> 
+                <div> 
+               <label>Email Address <input type="email" name="email" required></label>
+       </div> 
+                <div> 
+                  <label>Mobile Number <input type="tel" name="mobile" required></label>
+       </div> 
+                <div> 
+                  <label>Age <input type="number" name="age" required></label>
+       </div> 
+                <div> 
+                  <label>Gender <input type="text" name="gender" required></label>
+       </div> 
+                <div> 
+                  <label>Complete Address <textarea name="address" required></textarea></label>
         <label>
+          </div> 
+                <div> 
           <!-- Address Dropdowns -->
           <div class="row">
             <label>Region
               <select id="region" required>
+                </div> 
                 <option value="">Select Region</option>
                 <option value="ncr">National Capital Region</option>
-                <option value="central_luzon">Central Luzon</option>
-                <option value="central_visayas">Central Visayas</option>
-                <option value="davao_region">Davao Region</option>
-                <option value="other">Other</option>
+                  <option value="central_luzon">Central Luzon</option>
+               </div> 
+                <div> 
+                  <option value="central_visayas">Central Visayas</option>
+
+                  <option value="davao_region">Davao Region</option>
+                  <option value="other">Other</option>
               </select>
             </label>
-            <label>Province
+            </div> 
+                  <label>Province
+                                    </div> 
               <select id="province" required>
+
                 <option value="">Select Province</option>
                 <option value="metro_manila">Metro Manila</option>
                 <option value="cebu">Cebu</option>
@@ -58,7 +80,8 @@
             </label>
           </div>
           <!-- Employment Status -->
-          <label>Employment Status
+          <div> 
+               <label>Employment Status
             <select id="employmentStatus" name="employment" required>
               <option value="">Select Employment Status</option>
               <option value="fulltime">Employed full-time</option>
@@ -71,16 +94,23 @@
               <option value="other">Other</option>
             </select>
           </label>
+             </div>
           <input type="text" id="employmentOther" name="employmentOther" class="hidden" placeholder="Please specify">
-          <input type="checkbox" required />
+                 <div>  
+             </div>
+
+               <input type="checkbox" required />
           I agree with the <a href="https://aiwaapp.ai/site/12436/privacy-policy" target="_blank">Privacy Policy</a>
         </label>
+                <div></div>
         <label>
           <input type="checkbox" required />
           I agree with the <a href="https://aiwaapp.ai/site/12436/terms-of-service" target="_blank">Terms and Conditions</a>
         </label>
+          </div>
       </fieldset>
       <!-- Vulnerable Population Dropdown -->
+      <div>
       <label>Vulnerable Population
         <select id="vulnerable" required>
           <option value="">Select</option>
@@ -100,37 +130,59 @@
           <option value="none">None of the above</option>
         </select>
       </label>
+        </div>
       <input type="text" id="vulnerableOther" class="hidden" placeholder="Please specify (optional)">
       <!-- B. HEALTH INFO -->
       <fieldset>
+        <div>
         <legend>🧺 B. Health Info</legend>
+        </div>
+         <div>
         <label>Diagnosed with a condition?
+           </div>
           <select name="diagnosed">
             <option>No</option>
             <option>Yes</option>
           </select>
+         <div>
         </label>
         <textarea name="diagnosis" placeholder="If yes, state diagnosis"></textarea>
         <label>Taking any medication?
+           </div>
+         <div>
           <select name="meds">
             <option>No</option>
             <option>Yes</option>
           </select>
         </label>
+         <div>
+         </div>
+           
         <textarea name="medsDetails" placeholder="If yes, list medications"></textarea>
-        <label>Are you experiencing any of the following?</label>
-        <label><input type="checkbox" name="crisis"> Thoughts of harming yourself</label>
-        <label><input type="checkbox" name="anxiety"> Anxiety, panic, or phobias</label>
-        <label><input type="checkbox" name="depression"> Feeling down or hopeless</label>
-        <label><input type="checkbox" name="energy"> Feeling tired / low energy</label>
-        <label><input type="checkbox" name="sleep"> Poor sleep or oversleeping</label>
+        <div>
+           <label>Are you experiencing any of the following?</label>
+        </div>
+          <label><input type="checkbox" name="crisis"> Thoughts of harming yourself</label>
+        <div>
+        </div>
+           <label><input type="checkbox" name="anxiety"> Anxiety, panic, or phobias</label>
+         <div>
+         </div>
+           <label><input type="checkbox" name="depression"> Feeling down or hopeless</label>
+        <div>
+           <label><input type="checkbox" name="energy"> Feeling tired / low energy</label>
+        </div>
+          <label><input type="checkbox" name="sleep"> Poor sleep or oversleeping</label>
+         </div>
       </fieldset>
 
       <!-- C. SERVICE & PRICING INFO -->
       <fieldset>
         <legend>📅 C. Service Info & Price</legend>
         <!-- Service Type -->
+         <div>
         <label>Service Title
+          </div>
           <select id="serviceType" name="service" required>
             <option value="">Select Service</option>
             <option value="psychotherapy">Psychotherapy (PHP800/hr)</option>
@@ -141,18 +193,25 @@
             <option value="others">Other (PHP700/hr)</option>
           </select>
         </label>
+      </fieldset>
         <!-- Partner Professional (Read only) -->
-        <label>With
+       <div>  
+      <label>With
           <input type="text" value="C+ Partner Professional" readonly>
-        </label>
+        </div>
+      </label>
         <!-- Schedule -->
-        <label>When
+       <div> 
+      <label>When
           <input type="datetime-local" name="datetime" required>
         </label>
-        <!-- Where -->
-        <label>Where
+       </div>
+         <!-- Where -->
+       <div>  
+      <label>Where
           <input type="text" value="Online Session" readonly>
         </label>
+       </div>
         <!-- Live Pricing Box -->
         <div id="pricing-box">
           <strong>Total Price:</strong> <span id="totalPrice">PHP 0</span>
