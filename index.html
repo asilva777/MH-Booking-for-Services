@@ -4,11 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cognitio+ | Book a Session</title>
-  <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#1976d2">
   <style>
   <link rel="stylesheet" href="styles.css"/>
   </style>
+  <manifest>
+    <link rel="manifest" href="manifest.json">
+  </manifest>
+    <scrip>
+  <link rel="script" href="script.js"/>
+  </script>
 </head>
 <body>
   <main class="container">
@@ -221,7 +226,8 @@
     // PWA Service Worker registration
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function() {
-        navigator.serviceWorker.register('service-worker.js');
+        navigator.serviceWorker.register
+          <link rel="service-worker" href="service-worker.js"/>
       });
     }
 
@@ -286,8 +292,5 @@
       e.preventDefault();
       document.getElementById('confirmationMsg').innerHTML = '<strong>Booking submitted!</strong> We will contact you via email/SMS for confirmation.';
     });
-  <script>
-  <link rel="script" href="script.js"/>
-  </script>
 </body>
 </html>
