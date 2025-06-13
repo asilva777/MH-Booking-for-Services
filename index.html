@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cognitio+ | Book a Session</title>
   <link rel="stylesheet" href="styles.css"/>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#1976d2">
   <style>
     .row { display: flex; gap: 1rem; flex-wrap: wrap; }
     .row label, .row select, .row input, .row textarea { flex: 1; min-width: 180px; }
@@ -26,53 +28,50 @@
         <label>Gender <input type="text" name="gender" required></label>
         <label>Complete Address <textarea name="address" required></textarea></label>
         <label>
-
-             <!-- Address Dropdowns -->
-        <div class="row">
-          <label>Region
-            <select id="region" required>
-              <option value="">Select Region</option>
-              <option value="ncr">National Capital Region</option>
-              <option value="central_luzon">Central Luzon</option>
-              <option value="central_visayas">Central Visayas</option>
-              <option value="davao_region">Davao Region</option>
+          <!-- Address Dropdowns -->
+          <div class="row">
+            <label>Region
+              <select id="region" required>
+                <option value="">Select Region</option>
+                <option value="ncr">National Capital Region</option>
+                <option value="central_luzon">Central Luzon</option>
+                <option value="central_visayas">Central Visayas</option>
+                <option value="davao_region">Davao Region</option>
+                <option value="other">Other</option>
+              </select>
+            </label>
+            <label>Province
+              <select id="province" required>
+                <option value="">Select Province</option>
+                <option value="metro_manila">Metro Manila</option>
+                <option value="cebu">Cebu</option>
+                <option value="davao_del_sur">Davao del Sur</option>
+                <option value="pampanga">Pampanga</option>
+                <option value="other">Other</option>
+              </select>
+            </label>
+            <label>City/Municipality
+              <input type="text" id="city" placeholder="e.g., Quezon City">
+            </label>
+            <label>Barangay
+              <input type="text" id="barangay" placeholder="e.g., Barangay San Antonio">
+            </label>
+          </div>
+          <!-- Employment Status -->
+          <label>Employment Status
+            <select id="employmentStatus" name="employment" required>
+              <option value="">Select Employment Status</option>
+              <option value="fulltime">Employed full-time</option>
+              <option value="parttime">Employed part-time</option>
+              <option value="selfemployed">Self-employed</option>
+              <option value="unemployed">Unemployed</option>
+              <option value="student">Student</option>
+              <option value="retired">Retired</option>
+              <option value="contract">Contract/Freelance</option>
               <option value="other">Other</option>
             </select>
           </label>
-          <label>Province
-            <select id="province" required>
-              <option value="">Select Province</option>
-              <option value="metro_manila">Metro Manila</option>
-              <option value="cebu">Cebu</option>
-              <option value="davao_del_sur">Davao del Sur</option>
-              <option value="pampanga">Pampanga</option>
-              <option value="other">Other</option>
-            </select>
-          </label>
-          <label>City/Municipality
-            <input type="text" id="city" placeholder="e.g., Quezon City">
-          </label>
-          <label>Barangay
-            <input type="text" id="barangay" placeholder="e.g., Barangay San Antonio">
-          </label>
-        </div>
-
-           <!-- Employment Status -->
-        <label>Employment Status
-          <select id="employmentStatus" name="employment" required>
-            <option value="">Select Employment Status</option>
-            <option value="fulltime">Employed full-time</option>
-            <option value="parttime">Employed part-time</option>
-            <option value="selfemployed">Self-employed</option>
-            <option value="unemployed">Unemployed</option>
-            <option value="student">Student</option>
-            <option value="retired">Retired</option>
-            <option value="contract">Contract/Freelance</option>
-            <option value="other">Other</option>
-          </select>
-        </label>
-        <input type="text" id="employmentOther" name="employmentOther" class="hidden" placeholder="Please specify">
-
+          <input type="text" id="employmentOther" name="employmentOther" class="hidden" placeholder="Please specify">
           <input type="checkbox" required />
           I agree with the <a href="https://aiwaapp.ai/site/12436/privacy-policy" target="_blank">Privacy Policy</a>
         </label>
@@ -81,32 +80,30 @@
           I agree with the <a href="https://aiwaapp.ai/site/12436/terms-of-service" target="_blank">Terms and Conditions</a>
         </label>
       </fieldset>
-   
       <!-- Vulnerable Population Dropdown -->
-        <label>Vulnerable Population
-          <select id="vulnerable" required>
-            <option value="">Select</option>
-            <option value="elderly">Elderly (65+)</option>
-            <option value="children">Children (under 18)</option>
-            <option value="pwd">Persons with disabilities</option>
-            <option value="pregnant">Pregnant women</option>
-            <option value="lowincome">Low-income households</option>
-            <option value="homeless">Homeless individuals</option>
-            <option value="migrant">Migrant workers</option>
-            <option value="indigenous">Indigenous communities</option>
-            <option value="lgbtq">LGBTQ+ individuals</option>
-            <option value="chronic">People with chronic illnesses</option>
-            <option value="singleparent">Single-parent households</option>
-            <option value="refugee">Refugees and asylum seekers</option>
-            <option value="other">Other</option>
-            <option value="none">None of the above</option>
-          </select>
-        </label>
-        <input type="text" id="vulnerableOther" class="hidden" placeholder="Please specify (optional)">
-      </fieldset>
+      <label>Vulnerable Population
+        <select id="vulnerable" required>
+          <option value="">Select</option>
+          <option value="elderly">Elderly (65+)</option>
+          <option value="children">Children (under 18)</option>
+          <option value="pwd">Persons with disabilities</option>
+          <option value="pregnant">Pregnant women</option>
+          <option value="lowincome">Low-income households</option>
+          <option value="homeless">Homeless individuals</option>
+          <option value="migrant">Migrant workers</option>
+          <option value="indigenous">Indigenous communities</option>
+          <option value="lgbtq">LGBTQ+ individuals</option>
+          <option value="chronic">People with chronic illnesses</option>
+          <option value="singleparent">Single-parent households</option>
+          <option value="refugee">Refugees and asylum seekers</option>
+          <option value="other">Other</option>
+          <option value="none">None of the above</option>
+        </select>
+      </label>
+      <input type="text" id="vulnerableOther" class="hidden" placeholder="Please specify (optional)">
       <!-- B. HEALTH INFO -->
       <fieldset>
-        <legend>🩺 B. Health Info</legend>
+        <legend>🧺 B. Health Info</legend>
         <label>Diagnosed with a condition?
           <select name="diagnosed">
             <option>No</option>
@@ -132,7 +129,6 @@
       <!-- C. SERVICE & PRICING INFO -->
       <fieldset>
         <legend>📅 C. Service Info & Dynamic Pricing</legend>
-        
         <!-- Service Type -->
         <label>Service Title
           <select id="serviceType" name="service" required>
@@ -145,32 +141,34 @@
             <option value="others">Other (PHP700/hr)</option>
           </select>
         </label>
-
         <!-- Partner Professional (Read only) -->
         <label>With
           <input type="text" value="C+ Partner Professional" readonly>
         </label>
-
         <!-- Schedule -->
         <label>When
           <input type="datetime-local" name="datetime" required>
         </label>
-
         <!-- Where -->
         <label>Where
           <input type="text" value="Online Session" readonly>
         </label>
-
-      <!-- Live Pricing Box -->
-      <div id="pricing-box">
-        <strong>Total Price:</strong> <span id="totalPrice">PHP 0</span>
-      </div>
-
-      <button type="submit">Book Now</button>
+        <!-- Live Pricing Box -->
+        <div id="pricing-box">
+          <strong>Total Price:</strong> <span id="totalPrice">PHP 0</span>
+        </div>
+        <button type="submit">Book Now</button>
     </form>
     <div id="confirmationMsg"></div>
   </main>
   <script>
+    // PWA Service Worker registration
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('service-worker.js');
+      });
+    }
+
     // Elements
     const serviceType = document.getElementById('serviceType');
     const employmentStatus = document.getElementById('employmentStatus');
