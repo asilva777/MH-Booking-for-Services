@@ -1,354 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cognitio+ Appointment Booking</title>
-  <meta name="description" content="Book your appointment with Cognitio+ Mental Health Access Model. Choose services, profiles, and get dynamic pricing."/>
-  <meta name="keywords" content="mental health, appointment, booking, psychology, psychiatry, resilience, Cognitio+">
-  <meta property="og:title" content="Cognitio+ Appointment Booking" />
-  <meta property="og:description" content="Book your mental health appointment with dynamic pricing and service selection." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://github.com/asilva777/MH-Booking-for-Services" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-  <script src="script.js" defer></script>
-  <!-- Move styles to style.css in production -->
-  <style>
-    <link rel="stylesheet" href="style.css">
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background-color: #f4f8fb;
-      padding: 2rem;
-    }
-    h1 {
-      text-align: center;
-      color: #073b4c;
-    }
-    form {
-      max-width: 600px;
-      margin: 0 auto;
-      background-color: #fff;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    label {
-      display: block;
-      margin-top: 1rem;
-      font-weight: bold;
-    }
-    input, select, textarea {
-      width: 100%;
-      padding: 0.5rem;
-      margin-top: 0.5rem;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    input:invalid, select:invalid {
-      border-color: #e63946;
-    }
-    .validation-message {
-      color: #e63946;
-      font-size: 0.9rem;
-      display: none;
-    }
-    .visible {
-      display: block !important;
-    }
-    button {
-      margin-top: 2rem;
-      background-color: purple;
-      color: white;
-      padding: 1rem;
-      border: none;
-      border-radius: 5px;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-    button[aria-busy="true"] {
-      background-color: #888;
-      cursor: not-allowed;
-    }
-    .price {
-      margin-top: 1rem;
-      font-weight: bold;
-      color: #118ab2;
-      text-align: center;
-    }
-    .price-info {
-      font-size: 0.95rem;
-      color: #666;
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-    .summary {
-      margin-top: 2rem;
-      background-color: #e6f2ff;
-      padding: 1rem;
-      border-radius: 5px;
-      box-shadow: 0 1px 5px rgba(0,0,0,0.1);
-    }
-    .spinner {
-      display: none;
-      margin: 0 auto;
-      border: 4px solid #f3f3f3;
-      border-top: 4px solid #073b4c;
-      border-radius: 50%;
-      width: 32px;
-      height: 32px;
-      animation: spin 1s linear infinite;
-    }
-    @keyframes spin {
-      0% { transform: rotate(0deg);}
-      100% { transform: rotate(360deg);}
-    }
-    @media (max-width: 700px) {
-      body, form {
-        padding: 1rem;
-      }
-      form {
-        width: 100%;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Cognitio+</title>
+
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="cognitio.css">
 </head>
 <body>
-  <h1>Book Your Mental Health Appointment</h1>
-  <form id="bookingForm" novalidate aria-label="Appointment Booking Form">
-    <label for="name">Full Name:</label>
-    <input type="text" id="name" name="name" required aria-required="true" aria-label="Full Name">
-    <div class="validation-message" id="nameError">Please provide your full name.</div>
-    
-    <label for="age">Age:</label>
-    <input type="number" id="age" name="age" required min="1" max="120" aria-required="true" aria-label="Age">
-    <div class="validation-message" id="ageError">Please enter a valid age between 1 and 120.</div>
-    
-    <label for="contact">Contact Number:</label>
-    <input type="tel" id="contact" name="contact" required pattern="^09\d{9}$" maxlength="11" aria-required="true" aria-label="Contact Number (e.g. 09XXXXXXXXX)">
-    <div class="validation-message" id="contactError">Please enter a valid PH mobile number (e.g. 09XXXXXXXXX).</div>
-    
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required aria-required="true" aria-label="Email">
-    <div class="validation-message" id="emailError">Enter a valid email address.</div>
-    
-    <label for="address">Address:</label>
-    <input type="text" id="address" name="address" required aria-required="true" aria-label="Address">
-    <div class="validation-message" id="addressError">Please provide your address.</div>
-    
-    <label for="city">Select City/Province:</label>
-    <select id="city" name="city" required aria-required="true" aria-label="Select City or Province">
-      <option value="">-- Select City/Province --</option>
-      <optgroup label="Highly Urbanized">
-        <option value="metro">Metro Manila</option>
-        <option value="cebu">Cebu City</option>
-        <option value="davao">Davao City</option>
-      </optgroup>
-      <optgroup label="Other Provinces">
-        <option value="iloilo">Iloilo</option>
-        <option value="naga">Naga City</option>
-        <option value="launion">La Union</option>
-        <option value="bukidnon">Bukidnon</option>
-        <option value="others">Others</option>
-      </optgroup>
-    </select>
-    <div class="validation-message" id="cityError">Please select your city or province.</div>
-    
-    <label for="service">Select Service:</label>
-    <select id="service" name="service" required aria-required="true" aria-label="Select Service">
-      <option value="">-- Please choose a service --</option>
-      <optgroup label="Mental Health Services">
-        <option value="psychiatric">Psychiatric Consultation</option>
-        <option value="psychotherapy">Psychotherapy with Psychologists</option>
-        <option value="support">Psychosocial Support Intervention with MHPSS Expert</option>
-        <option value="rehabilitation">Psychosocial Rehabilitation Support with MHPSS Expert</option>
-        <option value="resilience">Resilience Consultation</option>
-      </optgroup>
-    </select>
-    <div class="validation-message" id="serviceError">Please select a service.</div>
 
-    <label for="profile">Select Your Profile:</label>
-    <select id="profile" name="profile" required aria-required="true" aria-label="Select Profile">
-      <option value="">-- Select Profile --</option>
-      <optgroup label="Special Groups">
-        <option value="student">Student / Youth (Low Income)</option>
-        <option value="senior">Senior Citizen</option>
-        <option value="pwds">Person with Disability</option>
-      </optgroup>
-      <optgroup label="General">
-        <option value="worker">Employed Individual</option>
-        <option value="default">General Public</option>
-      </optgroup>
-    </select>
-    <div class="validation-message" id="profileError">Please select your profile.</div>
+    <div class="app-container">
+        <!-- ===== SIDEBAR ===== -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class="fa-solid fa-brain logo-icon"></i>
+                <h1 class="logo-text">Cognitio+</h1>
+            </div>
 
-    <label for="date">Preferred Date:</label>
-    <input type="date" id="date" name="date" required aria-required="true" aria-label="Preferred Date">
-    <div class="validation-message" id="dateError">Please select a date.</div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#" class="nav-link active" data-view="dashboard-view"><i class="fa-solid fa-house-chimney"></i><span>Dashboard</span></a></li>
+                    <li><a href="#" class="nav-link" data-view="find-professional-view"><i class="fa-solid fa-magnifying-glass"></i><span>Find a Professional</span></a></li>
+                    <li><a href="#" class="nav-link"><i class="fa-solid fa-calendar-check"></i><span>My Sessions</span></a></li>
+                    <li><a href="#" class="nav-link"><i class="fa-solid fa-comments"></i><span>Messages</span><span class="notification-badge">3</span></a></li>
+                    <li><a href="#" class="nav-link"><i class="fa-solid fa-book-open"></i><span>Resources</span></a></li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-profile-widget">
+                    <img src="https://i.pravatar.cc/40?u=janesmith" alt="User Avatar">
+                    <div class="user-info">
+                        <span class="user-name">Jane Smith</span>
+                        <a href="#" class="profile-link">View Profile</a>
+                    </div>
+                </div>
+                <a href="#" class="nav-link logout-link"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a>
+            </div>
+        </aside>
 
-    <label for="time">Preferred Time:</label>
-    <input type="time" id="time" name="time" required aria-required="true" aria-label="Preferred Time">
-    <div class="validation-message" id="timeError">Please select a time.</div>
+        <!-- ===== MAIN CONTENT ===== -->
+        <main class="main-content">
+            <!-- == Dashboard View == -->
+            <div id="dashboard-view" class="view">
+                <header class="main-header">
+                    <h2>Welcome back, Jane</h2>
+                    <p>Your mental wellness journey continues here. What would you like to do today?</p>
+                </header>
 
-    <div class="price" id="priceOutput" aria-live="polite">Estimated Price: PHP 0</div>
-    <div class="price-info" id="priceInfo">
-      Pricing is based on service, profile discount, and an urban area add-on (20%). <a href="#" aria-label="More info" title="More info on pricing" onclick="alert('Base rates: Psychiatric 2,000; Psychotherapy 1,500; Support 1,200; Rehabilitation 1,000; Resilience 800. Discounts: Student 40%, Worker 10%, Senior/PWD 30%. Highly urbanized cities add 20%.')">More info</a>
+                <div class="dashboard-grid">
+                    <div class="card primary-card">
+                        <h3><i class="fa-solid fa-calendar-star"></i>Your Next Session</h3>
+                        <p>You have an upcoming video call with <strong>Dr. Alisha Reed</strong>.</p>
+                        <div class="session-time">
+                            Tuesday, Oct 26th at 3:00 PM
+                        </div>
+                        <button class="btn btn-secondary">Join Call (in 24:15:30)</button>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fa-solid fa-compass"></i>Quick Actions</h3>
+                        <div class="quick-actions">
+                            <a href="#" class="action-item" data-view-target="find-professional-view">
+                                <i class="fa-solid fa-user-plus"></i> Book a new session
+                            </a>
+                             <a href="#" class="action-item">
+                                <i class="fa-solid fa-pen-to-square"></i> Write in your journal
+                            </a>
+                             <a href="#" class="action-item">
+                                <i class="fa-solid fa-comment-dots"></i> Message your therapist
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- == Find a Professional View == -->
+            <div id="find-professional-view" class="view hidden">
+                 <header class="main-header">
+                    <h2>Find a Professional</h2>
+                    <p>Search for a therapist that fits your needs. You can filter by specialty, availability, and more.</p>
+                </header>
+                
+                <div class="filters">
+                    <input type="text" placeholder="Search by name...">
+                    <select><option>Specialty (e.g. Anxiety)</option></select>
+                    <select><option>Availability (e.g. Weekends)</option></select>
+                    <button class="btn btn-primary">Search</button>
+                </div>
+
+                <div class="professional-list">
+                    <!-- Professional Card 1 -->
+                    <div class="professional-card">
+                        <img src="https://i.pravatar.cc/80?u=alishareed" alt="Dr. Alisha Reed">
+                        <div class="professional-details">
+                            <h4>Dr. Alisha Reed</h4>
+                            <span class="specialty">Cognitive Behavioral Therapy (CBT)</span>
+                            <div class="rating">
+                                <i class="fa-solid fa-star"></i> 4.9 <span class="review-count">(128 reviews)</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-secondary" data-view-target="booking-view">View Profile & Book</button>
+                    </div>
+                    <!-- Professional Card 2 -->
+                    <div class="professional-card">
+                        <img src="https://i.pravatar.cc/80?u=markchen" alt="Dr. Mark Chen">
+                        <div class="professional-details">
+                            <h4>Dr. Mark Chen</h4>
+                            <span class="specialty">Mindfulness & Stress Reduction</span>
+                            <div class="rating">
+                                <i class="fa-solid fa-star"></i> 4.8 <span class="review-count">(95 reviews)</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-secondary" data-view-target="booking-view">View Profile & Book</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- == Booking View (Professional's Profile) == -->
+            <div id="booking-view" class="view hidden">
+                <header class="main-header">
+                    <a href="#" class="back-link" data-view-target="find-professional-view"><i class="fa-solid fa-arrow-left"></i> Back to Search</a>
+                    <h2>Book a Session with Dr. Alisha Reed</h2>
+                </header>
+                <div class="booking-layout">
+                    <div class="profile-section">
+                        <img src="https://i.pravatar.cc/120?u=alishareed" alt="Dr. Alisha Reed">
+                        <h3>Dr. Alisha Reed, PhD</h3>
+                        <p class="bio">With over 10 years of experience in CBT, I specialize in helping individuals navigate anxiety and build resilience. My approach is collaborative and goal-oriented, empowering you to make lasting change.</p>
+                        <h4>Specialties</h4>
+                        <div class="tags">
+                            <span class="tag">Anxiety</span><span class="tag">Depression</span><span class="tag">CBT</span>
+                        </div>
+                    </div>
+                    <div class="calendar-section card">
+                        <h3>Select a Date & Time</h3>
+                        <p>Available slots are shown in blue. All times are in your local timezone.</p>
+                        <!-- A real app would have an interactive calendar here -->
+                        <img src="https://i.imgur.com/GzB1yvN.png" alt="Calendar placeholder" class="calendar-placeholder"/>
+                        <button id="requestBookingBtn" class="btn btn-primary btn-full-width">Request 3:00 PM Session</button>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
-    <button type="submit" aria-label="Book Now" id="submitBtn">Book Now</button>
-    <div class="spinner" id="spinner" aria-label="Loading"></div>
-  </form>
-  
-  <div class="summary" id="summaryCard" style="display:none;" tabindex="0" aria-live="polite"></div>
-  
-  <!-- Move JS to external app.js in production -->
-  <script>
-    // EmailJS: Do not expose your keys in production! Use environment variables/serverless functions.
-    document.addEventListener('DOMContentLoaded', function() {
-      // EmailJS initialization
-      emailjs.init("service_xfy4bbu"); // Move to env/server in production
 
-      const form = document.getElementById('bookingForm');
-      const spinner = document.getElementById('spinner');
-      const submitBtn = document.getElementById('submitBtn');
-      const summary = document.getElementById('summaryCard');
-      const priceOutput = document.getElementById('priceOutput');
-      const serviceSelect = document.getElementById('service');
-      const profileSelect = document.getElementById('profile');
-      const citySelect = document.getElementById('city');
-      let finalPrice = 0;
-      const basePrices = {
-        psychiatric: 2000,
-        psychotherapy: 1500,
-        support: 1200,
-        rehabilitation: 1000,
-        resilience: 800
-      };
-      const discounts = {
-        student: 0.4,
-        worker: 0.1,
-        senior: 0.3,
-        pwds: 0.3,
-        default: 0
-      };
-      const urbanAddOn = ["metro", "cebu", "davao"];
-      function calculatePrice() {
-        const service = serviceSelect.value;
-        const profile = profileSelect.value;
-        const city = citySelect.value;
-        if (service && profile && city) {
-          const base = basePrices[service];
-          const discount = discounts[profile];
-          const cityRate = urbanAddOn.includes(city) ? 1.2 : 1.0;
-          const discounted = base - (base * discount);
-          finalPrice = discounted * cityRate;
-          priceOutput.textContent = `Estimated Price: PHP ${finalPrice.toFixed(2)}`;
-        } else {
-          finalPrice = 0;
-          priceOutput.textContent = 'Estimated Price: PHP 0';
-        }
-      }
-      serviceSelect.addEventListener('change', calculatePrice);
-      profileSelect.addEventListener('change', calculatePrice);
-      citySelect.addEventListener('change', calculatePrice);
+    <!-- Booking Confirmation Modal -->
+    <div id="bookingModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="modal-close-btn">×</button>
+            <i class="fa-regular fa-circle-check modal-icon"></i>
+            <h2>Request Sent!</h2>
+            <p>Your booking request has been sent to Dr. Alisha Reed. You will receive a notification and an email once she confirms the session.</p>
+            <button id="modalClose" class="btn btn-primary">Back to Dashboard</button>
+        </div>
+    </div>
 
-      // Real-time validation
-      const fields = [
-        {id: 'name', message: 'nameError'},
-        {id: 'age', message: 'ageError'},
-        {id: 'contact', message: 'contactError'},
-        {id: 'email', message: 'emailError'},
-        {id: 'address', message: 'addressError'},
-        {id: 'city', message: 'cityError'},
-        {id: 'service', message: 'serviceError'},
-        {id: 'profile', message: 'profileError'},
-        {id: 'date', message: 'dateError'},
-        {id: 'time', message: 'timeError'}
-      ];
-      fields.forEach(f => {
-        const input = document.getElementById(f.id);
-        const msg = document.getElementById(f.message);
-        input.addEventListener('input', function() {
-          if (input.checkValidity()) {
-            msg.classList.remove('visible');
-          } else {
-            msg.classList.add('visible');
-          }
-        });
-      });
-
-      function validateForm() {
-        let valid = true;
-        fields.forEach(f => {
-          const input = document.getElementById(f.id);
-          const msg = document.getElementById(f.message);
-          if (!input.checkValidity()) {
-            msg.classList.add('visible');
-            valid = false;
-          } else {
-            msg.classList.remove('visible');
-          }
-        });
-        return valid;
-      }
-
-      form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        if (!validateForm()) {
-          return;
-        }
-        spinner.style.display = 'block';
-        submitBtn.setAttribute('aria-busy', 'true');
-        submitBtn.disabled = true;
-
-        const templateParams = {
-          name: form.name.value,
-          age: form.age.value,
-          contact: form.contact.value,
-          email: form.email.value,
-          address: form.address.value,
-          city: form.city.value,
-          service: form.service.value,
-          profile: form.profile.value,
-          date: form.date.value,
-          time: form.time.value,
-          price: finalPrice.toFixed(2)
-        };
-
-        emailjs.send("service_xfy4bbu", "template_default", templateParams)
-          .then(function(response) {
-            spinner.style.display = 'none';
-            submitBtn.removeAttribute('aria-busy');
-            submitBtn.disabled = false;
-            alert("Booking email sent successfully!");
-          }, function(error) {
-            spinner.style.display = 'none';
-            submitBtn.removeAttribute('aria-busy');
-            submitBtn.disabled = false;
-            let errorMsg = "Failed to send booking email.";
-            if (error.status === 0) errorMsg += " (Network error.)";
-            if (error.text) errorMsg += " " + error.text;
-            alert(errorMsg);
-          });
-
-        summary.innerHTML = `
-          <h3>Booking Summary</h3>
-          <p><strong>Name:</strong> ${templateParams.name}</p>
-          <p><strong>Age:</strong> ${templateParams.age}</p>
-          <p><strong>Contact:</strong> ${templateParams.contact}</p>
-          <p><strong>Email:</strong> ${templateParams.email}</p>
-          <p><strong>Address:</strong> ${templateParams.address}</p>
-          <p><strong>City:</strong> ${templateParams.city}</p>
-          <p><strong>Service:</strong> ${templateParams.service}</p>
-          <p><strong>Profile:</strong> ${templateParams.profile}</p>
-          <p><strong>Date:</strong> ${templateParams.date}</p>
-          <p><strong>Time:</strong> ${templateParams.time}</p>
-          <p><strong>Price:</strong> PHP ${templateParams.price}</p>
-          <hr>
-        `;
-        summary.style.display = 'block';
-        summary.focus();
-        summary.scrollIntoView({ behavior: 'smooth' });
-      });
-    });
-  </script>
+    <!-- Custom JavaScript -->
+    <script src="cognitio.js"></script>
 </body>
 </html>
