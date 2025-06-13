@@ -1,98 +1,127 @@
+/* Import Google Fonts with font-display swap for performance */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oswald:wght@400;700&display=swap');
 
-/* Color palette */
+/* ============================================================
+   Root Variables: Colors, Spacing, Typography
+   ============================================================ */
 :root {
-  --purple: #5f259f;      /* Royal purple */
-  --yellow: #ffd700;      /* Golden yellow */
+  /* Colors */
+  --purple: #5f259f;
+  --yellow: #ffd700;
   --white: #fff;
   --light-purple: #f3f0fa;
   --gray: #f8f8fc;
   --text: #222;
   --border: #e0d7f3;
+  --readonly-bg: #ece4fa;
+  --readonly-border: #ddd;
+
+  /* Spacing */
+  --spacing-xs: 0.3rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2.5rem;
+
+  /* Typography */
+  --font-family-base: 'Montserrat', Arial, sans-serif;
+  --font-family-head: 'Oswald', 'Montserrat', Arial, sans-serif;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.3rem;
+  --font-size-xl: clamp(2rem, 5vw, 2.5rem);
+  --font-size-price: 1.25rem;
+  --font-size-confirm: 1.1rem;
+  --font-size-btn: 1.35rem;
+  --font-weight-bold: 700;
 }
 
-/* Base styles */
+/* ============================================================
+   Base and Layout
+   ============================================================ */
 body {
   background: var(--light-purple);
   color: var(--text);
-  font-family: 'Montserrat', Arial, sans-serif;
+  font-family: var(--font-family-base);
   margin: 0;
   padding: 0;
   min-height: 100vh;
+  font-size: var(--font-size-base);
 }
 
 .container {
   max-width: 680px;
-  margin: 2.5rem auto;
+  margin: var(--spacing-xl) auto;
   background: var(--white);
   border-radius: 16px;
   box-shadow: 0 8px 32px rgba(95, 37, 159, 0.13);
-  padding: 2.5rem 2rem 2rem 2rem;
+  padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-lg) var(--spacing-lg);
 }
 
+/* ============================================================
+   Typography and Headings
+   ============================================================ */
 h1, legend {
-  font-family: 'Oswald', 'Montserrat', Arial, sans-serif;
+  font-family: var(--font-family-head);
   color: var(--purple);
-  font-weight: 700;
-  margin-bottom: 1.25rem;
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-lg);
   letter-spacing: 1px;
 }
 
 h1 {
   text-align: center;
   margin-top: 0;
-  font-size: 2.5rem;
+  font-size: var(--font-size-xl);
 }
 
 legend {
-  font-size: 1.3rem;
+  font-size: var(--font-size-lg);
 }
 
+/* ============================================================
+   Forms and Inputs
+   ============================================================ */
 fieldset {
   border: 2px solid var(--purple);
   border-radius: 10px;
-  margin-bottom: 1.5rem;
-  padding: 1.2rem 1.2rem 1rem 1.2rem;
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-md) var(--spacing-md) var(--spacing-md) var(--spacing-md);
   background: var(--gray);
 }
 
 label {
   display: block;
-  margin-bottom: 1.1rem;
-  font-size: 1rem;
+  margin-bottom: var(--spacing-md);
+  font-size: var(--font-size-base);
   font-weight: 500;
   color: var(--purple);
 }
 
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-input[type="number"],
-input[type="datetime-local"],
+input,
 select,
 textarea {
-  font-family: 'Montserrat', Arial, sans-serif;
+  font-family: var(--font-family-base);
   width: 100%;
-  padding: 0.65rem 0.85rem;
-  margin-top: 0.3rem;
+  padding: var(--spacing-sm) var(--spacing-md);
+  margin-top: var(--spacing-xs);
   border: 1.5px solid var(--border);
   border-radius: 7px;
-  font-size: 1rem;
+  font-size: var(--font-size-base);
   background: var(--white);
   color: var(--text);
   box-sizing: border-box;
   transition: border-color 0.2s;
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="tel"]:focus,
-input[type="number"]:focus,
-input[type="datetime-local"]:focus,
+input:focus,
 select:focus,
-textarea:focus {
+textarea:focus,
+button:focus,
+a:focus {
   border-color: var(--purple);
-  outline: none;
+  outline: 2px solid var(--yellow);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(95, 37, 159, 0.18);
 }
 
 textarea {
@@ -101,86 +130,114 @@ textarea {
 }
 
 input[readonly] {
-  background: #ece4fa;
-  border: 1.5px solid #ddd;
+  background: var(--readonly-bg);
+  border: 1.5px solid var(--readonly-border);
 }
 
+/* Checkboxes */
 input[type="checkbox"] {
-  margin-right: 0.5em;
+  margin-right: var(--spacing-sm);
   accent-color: var(--purple);
 }
 
-/* Buttons */
-button[type="submit"] {
+/* ============================================================
+   Buttons
+   ============================================================ */
+button,
+.button {
   background: linear-gradient(90deg, var(--purple) 80%, var(--yellow) 120%);
   color: var(--white);
-  font-family: 'Oswald', 'Montserrat', Arial, sans-serif;
-  font-size: 1.35rem;
-  font-weight: 700;
+  font-family: var(--font-family-head);
+  font-size: var(--font-size-btn);
+  font-weight: var(--font-weight-bold);
   border: none;
   border-radius: 7px;
   padding: 0.9rem 0;
   width: 100%;
   cursor: pointer;
-  margin-top: 1.5rem;
+  margin-top: var(--spacing-lg);
   box-shadow: 0 2px 8px rgba(95, 37, 159, 0.11);
   letter-spacing: 1px;
-  transition: background 0.18s, box-shadow 0.18s;
+  transition: background 0.18s, box-shadow 0.18s, color 0.18s;
 }
 
-button[type="submit"]:hover,
-button[type="submit"]:focus {
+button:hover,
+button:focus,
+.button:hover,
+.button:focus {
   background: linear-gradient(90deg, var(--yellow) 20%, var(--purple) 100%);
   color: var(--purple);
   box-shadow: 0 4px 18px rgba(95, 37, 159, 0.16);
 }
 
-/* Pricing Box */
+/* ============================================================
+   Pricing Box
+   ============================================================ */
 #pricing-box {
   background: var(--purple);
   color: var(--yellow);
   border-radius: 7px;
-  font-family: 'Oswald', 'Montserrat', sans-serif;
-  font-size: 1.25rem;
+  font-family: var(--font-family-head);
+  font-size: var(--font-size-price);
   text-align: center;
-  margin: 2rem 0 0.7rem 0;
+  margin: var(--spacing-xl) 0 var(--spacing-sm) 0;
   padding: 1.05rem 0.5rem;
   box-shadow: 0 2px 8px 0 rgba(95, 37, 159, 0.07);
 }
-
 #pricing-box strong {
   color: var(--white);
   font-size: 1.15em;
 }
 
-/* Confirmation message */
+/* ============================================================
+   Confirmation Message
+   ============================================================ */
 #confirmationMsg {
-  margin-top: 1.2rem;
-  padding: 1.1rem;
+  margin-top: var(--spacing-lg);
+  padding: var(--spacing-md);
   border-radius: 8px;
   background: var(--yellow);
   color: var(--purple);
-  font-size: 1.1rem;
-  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: var(--font-size-confirm);
+  font-family: var(--font-family-base);
   text-align: center;
   font-weight: 600;
   display: none;
 }
-
 #confirmationMsg strong {
   color: var(--purple);
 }
 
-/* Flex Rows for address groupings */
+/* ============================================================
+   Address Groupings - Grid Layout
+   ============================================================ */
 .row {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin-bottom: 1.1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
 }
 .row > label {
-  flex: 1 1 180px;
   min-width: 180px;
+}
+
+/* ============================================================
+   Utility Classes
+   ============================================================ */
+/* Spacing */
+.mt-1 { margin-top: var(--spacing-md) !important; }
+.mt-2 { margin-top: var(--spacing-lg) !important; }
+.mb-1 { margin-bottom: var(--spacing-md) !important; }
+.mb-2 { margin-bottom: var(--spacing-lg) !important; }
+.text-center { text-align: center !important; }
+
+/* Visually hidden (for accessibility) */
+.visually-hidden {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
 }
 
 /* Hide class */
@@ -188,7 +245,9 @@ button[type="submit"]:focus {
   display: none !important;
 }
 
-/* Links in policies */
+/* ============================================================
+   Links & Policies
+   ============================================================ */
 a {
   color: var(--purple);
   text-decoration: underline;
@@ -197,27 +256,40 @@ a {
 a:hover,
 a:focus {
   color: var(--yellow);
+  outline: 2px solid var(--purple);
+}
+
+/* ============================================================
+   Responsive Design (Mobile First)
+   ============================================================ */
+@media (min-width: 700px) {
+  .container {
+    padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-lg) var(--spacing-lg);
+  }
+  h1 {
+    font-size: var(--font-size-xl);
+  }
 }
 
 @media (max-width: 700px) {
   .container {
-    padding: 1rem 0.5rem;
+    padding: var(--spacing-md) var(--spacing-sm);
   }
   h1 {
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 6vw, 2rem);
   }
   .row {
-    flex-direction: column;
+    grid-template-columns: 1fr;
     gap: 0;
   }
 }
 
 @media (max-width: 480px) {
   fieldset {
-    padding: 0.7rem 0.3rem 0.7rem 0.3rem;
+    padding: var(--spacing-sm) var(--spacing-xs) var(--spacing-sm) var(--spacing-xs);
   }
   #pricing-box {
     font-size: 1rem;
-    padding: 0.7rem 0.2rem;
+    padding: var(--spacing-sm) var(--spacing-xs);
   }
 }
