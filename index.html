@@ -1,170 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | Cognitio+</title>
-
-    <!-- Google Fonts: Poppins -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Custom Stylesheet -->
-    <link rel="stylesheet" href="cognitio.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cognitio+ | Book a Session</title>
+  <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
+  <main class="container">
+    <h1>Book Your Mental Health Session</h1>
+    <form id="bookingForm">
+      <!-- A. CLIENT INFO -->
+      <fieldset>
+        <legend>🧍 A. Client Info</legend>
+        <label>Full Name <input type="text" name="name" required></label>
+        <label>Email Address <input type="email" name="email" required></label>
+        <label>Mobile Number <input type="tel" name="mobile" required></label>
+        <label>Age <input type="number" name="age" required></label>
+        <label>Gender <input type="text" name="gender" required></label>
+        <label>Complete Address <textarea name="address" required></textarea></label>
 
-    <div class="app-container">
-        <!-- ===== SIDEBAR ===== -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <i class="fa-solid fa-brain logo-icon"></i>
-                <h1 class="logo-text">Cognitio+</h1>
-            </div>
+        <label>
+          <input type="checkbox" required />
+          I agree with the <a href="https://aiwaapp.ai/site/12436/privacy-policy" target="_blank">Privacy Policy</a>
+        </label>
+        <label>
+          <input type="checkbox" required />
+          I agree with the <a href="https://aiwaapp.ai/site/12436/terms-of-service" target="_blank">Terms and Conditions</a>
+        </label>
+      </fieldset>
 
-            <nav class="sidebar-nav">
-                <ul>
-                    <li><a href="#" class="nav-link active" data-view="dashboard-view"><i class="fa-solid fa-house-chimney"></i><span>Dashboard</span></a></li>
-                    <li><a href="#" class="nav-link" data-view="find-professional-view"><i class="fa-solid fa-magnifying-glass"></i><span>Find a Professional</span></a></li>
-                    <li><a href="#" class="nav-link"><i class="fa-solid fa-calendar-check"></i><span>My Sessions</span></a></li>
-                    <li><a href="#" class="nav-link"><i class="fa-solid fa-comments"></i><span>Messages</span><span class="notification-badge">3</span></a></li>
-                    <li><a href="#" class="nav-link"><i class="fa-solid fa-book-open"></i><span>Resources</span></a></li>
-                </ul>
-            </nav>
-            
-            <div class="sidebar-footer">
-                <div class="user-profile-widget">
-                    <img src="https://i.pravatar.cc/40?u=janesmith" alt="User Avatar">
-                    <div class="user-info">
-                        <span class="user-name">Jane Smith</span>
-                        <a href="#" class="profile-link">View Profile</a>
-                    </div>
-                </div>
-                <a href="#" class="nav-link logout-link"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a>
-            </div>
-        </aside>
+      <!-- B. HEALTH INFO -->
+      <fieldset>
+        <legend>🩺 B. Health Info</legend>
+        <label>Diagnosed with a condition?
+          <select name="diagnosed">
+            <option>No</option>
+            <option>Yes</option>
+          </select>
+        </label>
+        <textarea name="diagnosis" placeholder="If yes, state diagnosis"></textarea>
 
-        <!-- ===== MAIN CONTENT ===== -->
-        <main class="main-content">
-            <!-- == Dashboard View == -->
-            <div id="dashboard-view" class="view">
-                <header class="main-header">
-                    <h2>Welcome back, Jane</h2>
-                    <p>Your mental wellness journey continues here. What would you like to do today?</p>
-                </header>
+        <label>Taking any medication?
+          <select name="meds">
+            <option>No</option>
+            <option>Yes</option>
+          </select>
+        </label>
+        <textarea name="medsDetails" placeholder="If yes, list medications"></textarea>
 
-                <div class="dashboard-grid">
-                    <div class="card primary-card">
-                        <h3><i class="fa-solid fa-calendar-star"></i>Your Next Session</h3>
-                        <p>You have an upcoming video call with <strong>Dr. Alisha Reed</strong>.</p>
-                        <div class="session-time">
-                            Tuesday, Oct 26th at 3:00 PM
-                        </div>
-                        <button class="btn btn-secondary">Join Call (in 24:15:30)</button>
-                    </div>
-                    <div class="card">
-                        <h3><i class="fa-solid fa-compass"></i>Quick Actions</h3>
-                        <div class="quick-actions">
-                            <a href="#" class="action-item" data-view-target="find-professional-view">
-                                <i class="fa-solid fa-user-plus"></i> Book a new session
-                            </a>
-                             <a href="#" class="action-item">
-                                <i class="fa-solid fa-pen-to-square"></i> Write in your journal
-                            </a>
-                             <a href="#" class="action-item">
-                                <i class="fa-solid fa-comment-dots"></i> Message your therapist
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <label>Are you experiencing any of the following?</label>
+        <label><input type="checkbox" name="crisis"> Thoughts of harming yourself</label>
+        <label><input type="checkbox" name="anxiety"> Anxiety, panic, or phobias</label>
+        <label><input type="checkbox" name="depression"> Feeling down or hopeless</label>
+        <label><input type="checkbox" name="energy"> Feeling tired / low energy</label>
+        <label><input type="checkbox" name="sleep"> Poor sleep or oversleeping</label>
+      </fieldset>
 
-            <!-- == Find a Professional View == -->
-            <div id="find-professional-view" class="view hidden">
-                 <header class="main-header">
-                    <h2>Find a Professional</h2>
-                    <p>Search for a therapist that fits your needs. You can filter by specialty, availability, and more.</p>
-                </header>
-                
-                <div class="filters">
-                    <input type="text" placeholder="Search by name...">
-                    <select><option>Specialty (e.g. Anxiety)</option></select>
-                    <select><option>Availability (e.g. Weekends)</option></select>
-                    <button class="btn btn-primary">Search</button>
-                </div>
+      <!-- C. SERVICE INFO -->
+      <fieldset>
+        <legend>📅 C. Service Info</legend>
+        <label>Service Title
+          <select name="service" required>
+            <option>Psychotherapy</option>
+            <option>Psychiatric Consultation</option>
+            <option>Psychosocial Expert Support</option>
+            <option>Psychosocial Rehab Expert</option>
+            <option>Resilience Consultation</option>
+          </select>
+        </label>
 
-                <div class="professional-list">
-                    <!-- Professional Card 1 -->
-                    <div class="professional-card">
-                        <img src="https://i.pravatar.cc/80?u=alishareed" alt="Dr. Alisha Reed">
-                        <div class="professional-details">
-                            <h4>Dr. Alisha Reed</h4>
-                            <span class="specialty">Cognitive Behavioral Therapy (CBT)</span>
-                            <div class="rating">
-                                <i class="fa-solid fa-star"></i> 4.9 <span class="review-count">(128 reviews)</span>
-                            </div>
-                        </div>
-                        <button class="btn btn-secondary" data-view-target="booking-view">View Profile & Book</button>
-                    </div>
-                    <!-- Professional Card 2 -->
-                    <div class="professional-card">
-                        <img src="https://i.pravatar.cc/80?u=markchen" alt="Dr. Mark Chen">
-                        <div class="professional-details">
-                            <h4>Dr. Mark Chen</h4>
-                            <span class="specialty">Mindfulness & Stress Reduction</span>
-                            <div class="rating">
-                                <i class="fa-solid fa-star"></i> 4.8 <span class="review-count">(95 reviews)</span>
-                            </div>
-                        </div>
-                        <button class="btn btn-secondary" data-view-target="booking-view">View Profile & Book</button>
-                    </div>
-                </div>
-            </div>
+        <label>With
+          <input type="text" value="C+ Partner Professional" readonly>
+        </label>
 
-            <!-- == Booking View (Professional's Profile) == -->
-            <div id="booking-view" class="view hidden">
-                <header class="main-header">
-                    <a href="#" class="back-link" data-view-target="find-professional-view"><i class="fa-solid fa-arrow-left"></i> Back to Search</a>
-                    <h2>Book a Session with Dr. Alisha Reed</h2>
-                </header>
-                <div class="booking-layout">
-                    <div class="profile-section">
-                        <img src="https://i.pravatar.cc/120?u=alishareed" alt="Dr. Alisha Reed">
-                        <h3>Dr. Alisha Reed, PhD</h3>
-                        <p class="bio">With over 10 years of experience in CBT, I specialize in helping individuals navigate anxiety and build resilience. My approach is collaborative and goal-oriented, empowering you to make lasting change.</p>
-                        <h4>Specialties</h4>
-                        <div class="tags">
-                            <span class="tag">Anxiety</span><span class="tag">Depression</span><span class="tag">CBT</span>
-                        </div>
-                    </div>
-                    <div class="calendar-section card">
-                        <h3>Select a Date & Time</h3>
-                        <p>Available slots are shown in blue. All times are in your local timezone.</p>
-                        <!-- A real app would have an interactive calendar here -->
-                        <img src="https://i.imgur.com/GzB1yvN.png" alt="Calendar placeholder" class="calendar-placeholder"/>
-                        <button id="requestBookingBtn" class="btn btn-primary btn-full-width">Request 3:00 PM Session</button>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
+        <label>When
+          <input type="datetime-local" name="datetime" required>
+        </label>
 
-    <!-- Booking Confirmation Modal -->
-    <div id="bookingModal" class="modal-overlay hidden">
-        <div class="modal-content">
-            <button class="modal-close-btn">×</button>
-            <i class="fa-regular fa-circle-check modal-icon"></i>
-            <h2>Request Sent!</h2>
-            <p>Your booking request has been sent to Dr. Alisha Reed. You will receive a notification and an email once she confirms the session.</p>
-            <button id="modalClose" class="btn btn-primary">Back to Dashboard</button>
-        </div>
-    </div>
+        <label>Where
+          <input type="text" value="Online Session" readonly>
+        </label>
 
-    <!-- Custom JavaScript -->
-    <script src="cognitio.js"></script>
+        <label>Employment Status <input type="text" name="employment" required></label>
+      </fieldset>
+
+      <button type="submit">Book Now</button>
+    </form>
+    <div id="confirmationMsg"></div>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
