@@ -1,34 +1,37 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oswald:wght@400;700&display=swap');
 :root {
-  /* Colors */
-  --purple: #5f259f;
-  --yellow: #ffd700;
-  --white: #fff;
-  --light-purple: #f3f0fa;
-  --gray: #f8f8fc;
-  --text: #222;
-  --border: #e0d7f3;
-  --readonly-bg: #ece4fa;
-  --readonly-border: #ddd;
-
+  --primary-color: #7A288A;
+  --secondary-color: #F8E231;
+  --background-color: #FFFFFF;
+}
+body {
+  font-family: Open Sans, sans-serif;
+  background-color: var(--background-color);
+}
+section {
+  padding: 40px 0;
+  text-align: center;
+}
+button {
+  background-color: var(--secondary-color);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+header {
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 20px;
+  
   /* Spacing */
   --spacing-xs: 0.3rem;
   --spacing-sm: 0.5rem;
   --spacing-md: 1rem;
   --spacing-lg: 1.5rem;
   --spacing-xl: 2.5rem;
-
-  /* Typography */
-  --font-family-base: 'Montserrat', Oswald, sans-serif;
-  --font-family-head: 'Oswald', 'Montserrat', Arial, sans-serif;
-  --font-size-base: 1rem;
-  --font-size-lg: 1.3rem;
-  --font-size-xl: clamp(2rem, 5vw, 2.5rem);
-  --font-size-price: 1.25rem;
-  --font-size-confirm: 1.1rem;
-  --font-size-btn: 1.35rem;
-  --font-weight-bold: 700;
-}
 
 /* ============================================================
    Base and Layout
