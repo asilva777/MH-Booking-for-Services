@@ -1,18 +1,19 @@
 {
-  "name": "MH Booking for Services",
-  "short_name": "MH Booking",
-  "start_url": ".",
+  "name": "Cognitio+ Booking",
+  "short_name": "Cognitio",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#1976d2",
+  "theme_color": "#a451a9",
+  "description": "Book culturally sensitive mental health services in the Philippines with dynamic pricing and subsidy options.",
   "icons": [
     {
-      "src": "icon-192.png",
+      "src": "/assets/icons/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "icon-512.png",
+      "src": "/assets/icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
