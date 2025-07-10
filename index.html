@@ -1,312 +1,99 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cognitio+ | Book a Session</title>
-  <meta name="theme-color" content="#1976d2">
-  <style>
-  <link rel="stylesheet" href="styles.css"/>
-  </style>
-  <manifest>
-    <link rel="manifest" href="manifest.json">
-  </manifest>
-    <scrip>
-  <link rel="script" href="script.js"/>
-  </script>
+  <title>Cognitio+ | Book Mental Health Services</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Book culturally sensitive mental health services in the Philippines with dynamic pricing and subsidy options."/>
+  <meta name="keywords" content="mental health booking Philippines, dynamic pricing therapy, subsidized counseling, AI-driven pricing"/>
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="Cognitio+ | Book Mental Health Services"/>
+  <meta property="og:description" content="Book culturally sensitive mental health services in the Philippines with dynamic pricing and subsidy options."/>
+  <meta property="og:image" content="/assets/images/og-image.jpg"/>
+  <meta property="og:url" content="https://cognitioplus.github.io/booking/ "/>
+  <meta property="og:type" content="website"/>
+
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon"/>
+  <link rel="apple-touch-icon" href="/assets/icons/icon-192x192.png"/>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Manifest -->
+  <link rel="manifest" href="/manifest.json" />
+
+  <!-- No JS fallback -->
+  <script>document.documentElement.classList.remove("no-js");</script>
 </head>
+
 <body>
-  <main class="container">
-    <header>
-  <h1>Cognitio+ Booking</h1>
-</header>
-    <form id="bookingForm" autocomplete="off">
-      <!-- A. CLIENT INFO -->
-      <fieldset>
-      <div>
-          <legend>🧍 A. Client Info</legend>
-      </div> 
-      <div>
-        <label>Full Name <input type="text" name="name" required></label>
-         </div> 
-        <div> 
-      <label>Email Address <input type="email" name="email" required></label>
-       </div> 
-        
-        <div> 
-       <label>Mobile Number <input type="tel" name="mobile" required></label>
-       </div> 
-        
-        <div> 
-      <label>Age <input type="number" name="age" required></label>
-       </div> 
-        
-      <div> 
-      <label>Gender <input type="text" name="gender" required></label>
-       </div> 
-        
-       <div> 
-      <label>Address<textarea name="address" required></textarea></label>
+  <header>
+    <h1>Cognitio+</h1>
+    <p>Book Culturally Sensitive Mental Health Services in the Philippines</p>
+  </header>
+
+  <main class="fade-up">
+    <section class="form-section">
+      <h2>Service Booking Form</h2>
+      <form id="booking-form">
         <label>
-        </div> 
-          <div> 
-          <!-- Address Dropdowns -->
-            <div class="row">
-            <label>Region
-              <select id="region" required>
-                <option value="">Select Region</option>
-                <option value="ncr">National Capital Region</option>
-                  <option value="central_luzon">Central Luzon</option>
-                  <option value="central_visayas">Central Visayas</option>
-                  <option value="davao_region">Davao Region</option>
-                  <option value="other">Other</option>
-              </select>
-            </label>
-            </div> 
-             
-            <div>
-                  <label>Province
-              <select id="province" required>
-                <option value="">Select Province</option>
-                <option value="metro_manila">Metro Manila</option>
-                <option value="cebu">Cebu</option>
-                <option value="davao_del_sur">Davao del Sur</option>
-                <option value="pampanga">Pampanga</option>
-                <option value="other">Other</option>
-              </select>
-            </label>
-            </div>
-             
-            <div>
-            <label>City/Municipality
-              <input type="text" id="city" placeholder="e.g., Quezon City">
-            </label>
-                    </div>
-            
-            <div>
-            <label>Barangay
-              <input type="text" id="barangay" placeholder="e.g., Barangay San Antonio">
-            </label>
-           </div>
-          <!-- Employment Status -->
-          <div> 
-               <label>Employment Status
-          <select id="employmentStatus" name="employment" required>
-              <option value="">Select Employment Status</option>
-              <option value="fulltime">Employed full-time</option>
-              <option value="parttime">Employed part-time</option>
-              <option value="selfemployed">Self-employed</option>
-              <option value="unemployed">Unemployed</option>
-              <option value="student">Student</option>
-              <option value="retired">Retired</option>
-              <option value="contract">Contract/Freelance</option>
-              <option value="other">Other</option>
-            </select>
-          </label>
-           </div>
-          <input type="text" id="employmentOther" name="employmentOther" class="hidden" placeholder="Please specify"> 
-             </div>
-        <br>     
-        <div> 
-            <input type="checkbox" required />
-          I agree with the <a href="https://aiwaapp.ai/site/12436/privacy-policy" target="_blank">Privacy Policy</a>
+          Full Name:
+          <input type="text" required>
         </label>
-          </div>
-          </br>    
-          <br>     
-           <div>
+
         <label>
-          <input type="checkbox" required />
-          I agree with the <a href="https://aiwaapp.ai/site/12436/terms-of-service" target="_blank">Terms and Conditions</a>
-         </div>
+          Email:
+          <input type="email" required>
         </label>
-                </br>     
-      </fieldset>
-      <!-- Vulnerable Population Dropdown -->
-     <br>     
-      <div>
-      <label>Vulnerable Population
-        <select id="vulnerable" required>
-          <option value="">Select</option>
-          <option value="elderly">Elderly (65+)</option>
-          <option value="children">Children (under 18)</option>
-          <option value="pwd">Persons with disabilities</option>
-          <option value="pregnant">Pregnant women</option>
-          <option value="lowincome">Low-income households</option>
-          <option value="homeless">Homeless individuals</option>
-          <option value="migrant">Migrant workers</option>
-          <option value="indigenous">Indigenous communities</option>
-          <option value="lgbtq">LGBTQ+ individuals</option>
-          <option value="chronic">People with chronic illnesses</option>
-          <option value="singleparent">Single-parent households</option>
-          <option value="refugee">Refugees and asylum seekers</option>
-          <option value="other">Other</option>
-          <option value="none">None of the above</option>
-        </select>
-      </label>
-        </div>
-      <input type="text" id="vulnerableOther" class="hidden" placeholder="Please specify (optional)">
-      </br>     
-      <!-- B. HEALTH INFO -->
-      <br>     
-      <fieldset>
-        <div>
-        <legend>🧺 B. Health Info</legend>
-        </div>
-         <div>
-        <label>Diagnosed with a condition?
-           </div>
-          <select name="diagnosed">
-            <option>No</option>
-            <option>Yes</option>
-          </select>
-         <div>
+
+        <label>
+          Preferred Date:
+          <input type="date" required>
         </label>
-        <textarea name="diagnosis" placeholder="If yes, state diagnosis"></textarea>
-        <label>Taking any medication?
-           </div>
-         <div>
-          <select name="meds">
-            <option>No</option>
-            <option>Yes</option>
+
+        <label>
+          Preferred Time:
+          <input type="time" required>
+        </label>
+
+        <label>
+          Type of Service:
+          <select id="service-type">
+            <option value="teletherapy">Teletherapy</option>
+            <option value="in-person">In-Person Session</option>
+            <option value="group">Group Therapy</option>
           </select>
         </label>
-         <div>
-         </div>
-           
-        <textarea name="medsDetails" placeholder="If yes, list medications"></textarea>
-        <div>
-           <label>Are you experiencing any of the following?</label>
-        </div>
-          <label><input type="checkbox" name="crisis"> Thoughts of harming yourself</label>
-        <div>
-        </div>
-           <label><input type="checkbox" name="anxiety"> Anxiety, panic, or phobias</label>
-         <div>
-         </div>
-           <label><input type="checkbox" name="depression"> Feeling down or hopeless</label>
-        <div>
-           <label><input type="checkbox" name="energy"> Feeling tired / low energy</label>
-        </div>
-          <label><input type="checkbox" name="sleep"> Poor sleep or oversleeping</label>
-         </div>
-      </fieldset>
-        </br>     
-      <!-- C. SERVICE & PRICING INFO -->
-      <br>     
-      <fieldset>
-        <legend>📅 C. Service Info & Price</legend>
-        <!-- Service Type -->
-         <div>
-        <label>Service Title
-          </div>
-          <select id="serviceType" name="service" required>
-            <option value="">Select Service</option>
-            <option value="psychotherapy">Psychotherapy (PHP800/hr)</option>
-            <option value="psychiatric">Psychiatric Consultation (PHP800/hr)</option>
-            <option value="psychosocial_support">Psychosocial Expert Support (PHP700/hr)</option>
-            <option value="psychosocial_rehab">Psychosocial Rehab Expert (PHP700/hr)</option>
-            <option value="resilience">Resilience Consultation (PHP700/hr)</option>
-            <option value="others">Other (PHP700/hr)</option>
+
+        <label>
+          Do you qualify for subsidies?
+          <select id="means-test">
+            <option value="low-income">Low Income</option>
+            <option value="student">Student</option>
+            <option value="pwd">PWD</option>
+            <option value="none">None</option>
           </select>
         </label>
-      </fieldset>
-              </br>     
-        <!-- Partner Professional (Read only) -->
-       <div>  
-      <label>With
-          <input type="text" value="C+ Partner Professional" readonly>
-        </div>
-      </label>
-        <!-- Schedule -->
-       <div> 
-      <label>When
-          <input type="datetime-local" name="datetime" required>
-        </label>
-       </div>
-         <!-- Where -->
-       <div>  
-      <label>Where
-          <input type="text" value="Online Session" readonly>
-        </label>
-       </div>
-        <!-- Live Pricing Box -->
-        <div id="pricing-box">
-          <strong>Total Price:</strong> <span id="totalPrice">PHP 0</span>
-        </div>
-        <button type="submit">Book Now</button>
-    </form>
-    <div id="confirmationMsg"></div>
+
+        <button type="submit">Calculate Price & Book</button>
+      </form>
+
+      <div id="price-result"></div>
+    </section>
   </main>
-  <script>
-    // PWA Service Worker registration
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function() {
-        navigator.serviceWorker.register
-          <link rel="service-worker" href="service-worker.js"/>
-      });
-    }
 
-    // Elements
-    const serviceType = document.getElementById('serviceType');
-    const employmentStatus = document.getElementById('employmentStatus');
-    const employmentOther = document.getElementById('employmentOther');
-    const region = document.getElementById('region');
-    const province = document.getElementById('province');
-    const vulnerable = document.getElementById('vulnerable');
-    const vulnerableOther = document.getElementById('vulnerableOther');
-    const totalPrice = document.getElementById('totalPrice');
+  <footer>
+    <p>&copy; 2025 Cognitio+. All rights reserved.</p>
+  </footer>
 
-    // Show/hide "Other" text fields
-    employmentStatus.addEventListener('change', () => {
-      employmentOther.classList.toggle('hidden', employmentStatus.value !== 'other');
-    });
-    vulnerable.addEventListener('change', () => {
-      vulnerableOther.classList.toggle('hidden', vulnerable.value !== 'other');
-    });
-
-    // Pricing logic
-    function calculatePrice() {
-      let basePrice = 0;
-
-      // Service Type
-      if (serviceType.value === 'psychotherapy' || serviceType.value === 'psychiatric') {
-        basePrice = 800;
-      } else if (serviceType.value && serviceType.value !== '') {
-        basePrice = 700;
-      }
-
-      // Employment Status adjustment
-      const discountStatuses = ['unemployed','student','retired'];
-      if (discountStatuses.includes(employmentStatus.value)) basePrice -= 100;
-
-      // Address adjustment
-      // Example: rural provinces (Cebu, Davao del Sur, Pampanga, Other) get PHP50 discount
-      const ruralProvinces = ['cebu', 'davao_del_sur', 'pampanga', 'other'];
-      if (ruralProvinces.includes(province.value)) basePrice -= 50;
-
-      // Vulnerable population adjustment (PHP100 discount)
-      const vulnerableDiscounts = [
-        "elderly","children","pwd","pregnant","lowincome","homeless","migrant","indigenous","lgbtq","chronic","singleparent","refugee"
-      ];
-      if (vulnerableDiscounts.includes(vulnerable.value)) basePrice -= 100;
-
-      // Minimum price
-      if (basePrice < 0) basePrice = 0;
-
-      totalPrice.textContent = `PHP ${basePrice}`;
-    }
-
-    // Listen for changes
-    [serviceType, employmentStatus, region, province, vulnerable].forEach(el => el.addEventListener('change', calculatePrice));
-
-    // Recalculate on load (if fields are prefilled)
-    window.addEventListener('DOMContentLoaded', calculatePrice);
-
-    // Optionally, show confirmation after submit (replace with real booking logic as needed)
-    document.getElementById('bookingForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      document.getElementById('confirmationMsg').innerHTML = '<strong>Booking submitted!</strong> We will contact you via email/SMS for confirmation.';
-    });
+  <!-- Scripts -->
+  <script src="script.js" defer></script>
 </body>
 </html>
