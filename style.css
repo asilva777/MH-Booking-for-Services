@@ -1,293 +1,93 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oswald:wght@400;700&display=swap');
 :root {
-  --primary-color: #7A288A;
-  --secondary-color: #F8E231;
-  --background-color: #FFFFFF;
-}
-body {
-  font-family: Open Sans, sans-serif;
-  background-color: var(--background-color);
-}
-section {
-  padding: 40px 0;
-  text-align: center;
-}
-button {
-  background-color: var(--secondary-color);
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 10px;
-}
-header {
-  background-color: var(--primary-color);
-  color: #fff;
-  padding: 20px;
-  
-  /* Spacing */
-  --spacing-xs: 0.3rem;
-  --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 1.5rem;
-  --spacing-xl: 2.5rem;
+  --color-primary: #a451a9;
+  --color-accent: #FFB81C;
+  --color-bg: #fff;
+  --color-text: #222;
 
-/* ============================================================
-   Base and Layout
-   ============================================================ */
-body {
-  background: var(--light-purple);
-  color: var(--text);
-  font-family: var(--font-family-base);
+  --font-sans: 'Montserrat', Arial, sans-serif;
+}
+
+* {
   margin: 0;
   padding: 0;
-  min-height: 100vh;
-  font-size: var(--font-size-base);
+  box-sizing: border-box;
 }
 
-.container {
-  max-width: 680px;
-  margin: var(--spacing-xl) auto;
-  background: var(--white);
-  border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(95, 37, 159, 0.13);
-  padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-lg) var(--spacing-lg);
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
 }
 
-/* ============================================================
-   Typography and Headings
-   ============================================================ */
-h1, legend {
-  font-family: var(--font-family-head);
-  color: var(--purple);
-  font-weight: var(--font-weight-bold);
-  margin-bottom: var(--spacing-lg);
-  letter-spacing: 1px;
-}
-
-h1 {
+header {
+  background-color: var(--color-primary);
+  color: white;
   text-align: center;
-  margin-top: 0;
-  font-size: var(--font-size-xl);
+  padding: 2rem 1rem;
 }
 
-legend {
-  font-size: var(--font-size-lg);
+main {
+  padding: 3rem 1rem;
+  max-width: 800px;
+  margin: auto;
 }
 
-/* ============================================================
-   Forms and Inputs
-   ============================================================ */
-fieldset {
-  border: 2px solid var(--purple);
-  border-radius: 10px;
-  margin-bottom: var(--spacing-lg);
-  padding: var(--spacing-md) var(--spacing-md) var(--spacing-md) var(--spacing-md);
-  background: var(--gray);
+.form-section h2 {
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 label {
-  display: block;
-  margin-bottom: var(--spacing-md);
-  font-size: var(--font-size-base);
-  font-weight: 500;
-  color: var(--purple);
+  display: flex;
+  flex-direction: column;
 }
 
-input,
-select,
-textarea {
-  font-family: var(--font-family-base);
+input, select, button {
+  padding: 0.75rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
   width: 100%;
-  padding: var(--spacing-sm) var(--spacing-md);
-  margin-top: var(--spacing-xs);
-  border: 1.5px solid var(--border);
-  border-radius: 7px;
-  font-size: var(--font-size-base);
-  background: var(--white);
-  color: var(--text);
-  box-sizing: border-box;
-  transition: border-color 0.2s;
 }
 
-input:focus,
-select:focus,
-textarea:focus,
-button:focus,
-a:focus {
-  border-color: var(--purple);
-  outline: 2px solid var(--yellow);
-  outline-offset: 2px;
-  box-shadow: 0 0 0 3px rgba(95, 37, 159, 0.18);
-}
-
-textarea {
-  min-height: 70px;
-  resize: vertical;
-}
-
-input[readonly] {
-  background: var(--readonly-bg);
-  border: 1.5px solid var(--readonly-border);
-}
-
-/* Checkboxes */
-input[type="checkbox"] {
-  margin-right: var(--spacing-sm);
-  accent-color: var(--purple);
-}
-
-/* ============================================================
-   Buttons
-   ============================================================ */
-button,
-.button {
-  background: linear-gradient(90deg, var(--purple) 80%, var(--yellow) 120%);
-  color: var(--white);
-  font-family: var(--font-family-head);
-  font-size: var(--font-size-btn);
-  font-weight: var(--font-weight-bold);
+button {
+  background-color: var(--color-primary);
+  color: white;
   border: none;
-  border-radius: 7px;
-  padding: 0.9rem 0;
-  width: 100%;
   cursor: pointer;
-  margin-top: var(--spacing-lg);
-  box-shadow: 0 2px 8px rgba(95, 37, 159, 0.11);
-  letter-spacing: 1px;
-  transition: background 0.18s, box-shadow 0.18s, color 0.18s;
 }
 
-button:hover,
-button:focus,
-.button:hover,
-.button:focus {
-  background: linear-gradient(90deg, var(--yellow) 20%, var(--purple) 100%);
-  color: var(--purple);
-  box-shadow: 0 4px 18px rgba(95, 37, 159, 0.16);
+button:hover {
+  background-color: #8b3fa3;
 }
 
-/* ============================================================
-   Pricing Box
-   ============================================================ */
-#pricing-box {
-  background: var(--purple);
-  color: var(--yellow);
-  border-radius: 7px;
-  font-family: var(--font-family-head);
-  font-size: var(--font-size-price);
+#price-result {
+  margin-top: 2rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--color-primary);
+}
+
+footer {
+  background-color: var(--color-primary);
+  color: white;
   text-align: center;
-  margin: var(--spacing-xl) 0 var(--spacing-sm) 0;
-  padding: 1.05rem 0.5rem;
-  box-shadow: 0 2px 8px 0 rgba(95, 37, 159, 0.07);
-}
-#pricing-box strong {
-  color: var(--white);
-  font-size: 1.15em;
+  padding: 2rem 1rem;
 }
 
-/* ============================================================
-   Confirmation Message
-   ============================================================ */
-#confirmationMsg {
-  margin-top: var(--spacing-lg);
-  padding: var(--spacing-md);
-  border-radius: 8px;
-  background: var(--yellow);
-  color: var(--purple);
-  font-size: var(--font-size-confirm);
-  font-family: var(--font-family-base);
-  text-align: center;
-  font-weight: 600;
-  display: none;
-}
-#confirmationMsg strong {
-  color: var(--purple);
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
 }
 
-/* ============================================================
-   Address Groupings - Grid Layout
-   ============================================================ */
-.row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: var(--spacing-md);
-  margin-bottom: var(--spacing-md);
-}
-.row > label {
-  min-width: 180px;
-}
-
-/* ============================================================
-   Utility Classes
-   ============================================================ */
-/* Spacing */
-.mt-1 { margin-top: var(--spacing-md) !important; }
-.mt-2 { margin-top: var(--spacing-lg) !important; }
-.mb-1 { margin-bottom: var(--spacing-md) !important; }
-.mb-2 { margin-bottom: var(--spacing-lg) !important; }
-.text-center { text-align: center !important; }
-
-/* Visually hidden (for accessibility) */
-.visually-hidden {
-  position: absolute !important;
-  height: 1px; width: 1px;
-  overflow: hidden;
-  clip: rect(1px, 1px, 1px, 1px);
-  white-space: nowrap;
-}
-
-/* Hide class */
-.hidden {
-  display: none !important;
-}
-
-/* ============================================================
-   Links & Policies
-   ============================================================ */
-a {
-  color: var(--purple);
-  text-decoration: underline;
-  transition: color 0.15s;
-}
-a:hover,
-a:focus {
-  color: var(--yellow);
-  outline: 2px solid var(--purple);
-}
-
-/* ============================================================
-   Responsive Design (Mobile First)
-   ============================================================ */
-@media (min-width: 700px) {
-  .container {
-    padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-lg) var(--spacing-lg);
-  }
-  h1 {
-    font-size: var(--font-size-xl);
-  }
-}
-
-@media (max-width: 700px) {
-  .container {
-    padding: var(--spacing-md) var(--spacing-sm);
-  }
-  h1 {
-    font-size: clamp(1.5rem, 6vw, 2rem);
-  }
-  .row {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-}
-
-@media (max-width: 480px) {
-  fieldset {
-    padding: var(--spacing-sm) var(--spacing-xs) var(--spacing-sm) var(--spacing-xs);
-  }
-  #pricing-box {
-    font-size: 1rem;
-    padding: var(--spacing-sm) var(--spacing-xs);
-  }
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
